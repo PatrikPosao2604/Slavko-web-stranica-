@@ -70,6 +70,8 @@ html {
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--header-h-compact) + 1rem);
   background: var(--c-bg);
+  /* iOS Safari ignorira overflow-x: hidden na body – clip ne stvara scroll kontejner */
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -90,6 +92,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body.no-scroll {
@@ -264,6 +267,7 @@ ol {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
+  max-width: 100%;
   cursor: pointer;
   overflow: hidden;
   isolation: isolate;
