@@ -1,0 +1,356 @@
+:host {
+  display: block;
+}
+
+.symptoms__layout {
+  display: grid;
+  gap: 2.5rem;
+
+  @media (min-width: 1100px) {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+/* --- Vizual vozila ------------------------------------------------------------ */
+.symptoms__visual {
+  margin: 0;
+
+  @media (min-width: 1100px) {
+    position: sticky;
+    top: calc(var(--header-h-compact) + 2rem);
+  }
+}
+
+.car {
+  position: relative;
+  padding: clamp(1rem, 3vw, 2rem);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-line);
+  background:
+    radial-gradient(70% 60% at 50% 45%, rgba(255, 255, 255, 0.05), transparent 70%),
+    linear-gradient(var(--c-line) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, var(--c-line) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--c-bg);
+}
+
+.car__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.car__ground {
+  stroke: var(--c-line-strong);
+  stroke-dasharray: 4 6;
+}
+
+.car__body {
+  fill: url(#car-body);
+  stroke: rgba(255, 255, 255, 0.28);
+  stroke-width: 1.5;
+}
+
+.car__glass {
+  fill: rgba(160, 180, 200, 0.08);
+  stroke: rgba(255, 255, 255, 0.18);
+}
+
+.car__line {
+  stroke: rgba(255, 255, 255, 0.12);
+}
+
+.car__part {
+  fill: rgba(255, 255, 255, 0.04);
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-dasharray: 3 3;
+  transition: all 0.4s var(--ease-out);
+}
+
+.car__rail {
+  stroke: rgba(255, 255, 255, 0.45);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.car__injector {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.car__fuel {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+
+.car__pipe {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.car__label {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  fill: var(--c-text-muted);
+  text-anchor: middle;
+  letter-spacing: 1px;
+}
+
+.car__smoke circle {
+  fill: rgba(255, 255, 255, 0.08);
+}
+
+.car__led {
+  fill: var(--c-text-dim);
+}
+
+.car__tyre {
+  fill: #0d0e10;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 1.5;
+}
+
+.car__rim {
+  fill: #1b1e23;
+  stroke: rgba(255, 255, 255, 0.35);
+}
+
+.car__hub {
+  fill: rgba(255, 255, 255, 0.4);
+}
+
+.car__zone.is-active {
+  .car__part {
+    fill: rgba(255, 90, 31, 0.12);
+    stroke: var(--c-accent);
+    stroke-dasharray: none;
+  }
+
+  .car__injector,
+  .car__rail,
+  .car__pipe,
+  .car__fuel {
+    stroke: var(--c-accent);
+  }
+
+  .car__led {
+    fill: var(--c-accent);
+  }
+
+  .car__smoke circle {
+    fill: rgba(255, 90, 31, 0.25);
+  }
+}
+
+.hotspot {
+  pointer-events: none;
+}
+
+.hotspot__glow {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.hotspot__ring {
+  fill: rgba(11, 12, 14, 0.6);
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: all 0.4s var(--ease-out);
+}
+
+.hotspot__dot {
+  fill: var(--c-text);
+  transition: fill 0.3s;
+}
+
+.hotspot.is-active {
+  .hotspot__glow {
+    opacity: 1;
+  }
+
+  .hotspot__ring {
+    stroke: var(--c-accent);
+    animation: ring 1.6s var(--ease-out) infinite;
+  }
+
+  .hotspot__dot {
+    fill: var(--c-accent);
+  }
+}
+
+@keyframes ring {
+  0% {
+    transform: scale(0.9);
+    stroke-opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    stroke-opacity: 0;
+  }
+}
+
+/* --- Gumbi zona ------------------------------------------------------------------ */
+.zones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.zone-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-surface);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--c-text-muted);
+  transition: all 0.3s var(--ease-out);
+
+  &:hover {
+    color: var(--c-text);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  &.is-active {
+    color: var(--c-text);
+    border-color: var(--c-accent);
+    background: var(--c-accent-soft);
+
+    .zone-btn__dot {
+      background: var(--c-accent);
+      box-shadow: 0 0 10px var(--c-accent);
+    }
+  }
+}
+
+.zone-btn__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-text-dim);
+  transition: all 0.3s;
+}
+
+.zone-btn__count {
+  font-size: 0.7rem;
+  color: var(--c-text-dim);
+}
+
+/* --- Popis simptoma ----------------------------------------------------------------- */
+.symptoms__list {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.symptom {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 1.1rem 1.1rem 1.2rem;
+  text-align: left;
+  border-radius: var(--radius);
+  border: 1px solid var(--c-line);
+  background: var(--c-surface);
+  transition:
+    border-color 0.3s,
+    background 0.3s,
+    opacity 0.3s,
+    transform 0.4s var(--ease-out);
+
+  &:hover,
+  &.is-active {
+    border-color: rgba(255, 90, 31, 0.5);
+    background: linear-gradient(135deg, rgba(255, 90, 31, 0.09), var(--c-surface) 60%);
+
+    .symptom__icon {
+      color: #0b0c0e;
+      background: var(--c-accent);
+      border-color: var(--c-accent);
+    }
+  }
+
+  &.is-dim {
+    opacity: 0.45;
+  }
+}
+
+.symptom__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--c-line-strong);
+  color: var(--c-accent);
+  transition: all 0.3s var(--ease-out);
+}
+
+.symptom__content {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.symptom__title {
+  font-family: var(--ff-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--c-text);
+}
+
+.symptom__text {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--c-text-muted);
+}
+
+.symptoms__cta {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px dashed var(--c-line-strong);
+  color: var(--c-text-muted);
+  font-size: 0.95rem;
+
+  strong {
+    display: block;
+    color: var(--c-text);
+    margin-bottom: 0.3rem;
+  }
+
+  .btn {
+    justify-self: start;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}

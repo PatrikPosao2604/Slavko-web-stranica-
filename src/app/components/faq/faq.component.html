@@ -1,0 +1,47 @@
+<section id="faq" class="section section--alt faq" aria-labelledby="faq-title">
+  <div class="container faq__layout">
+    <div class="faq__aside">
+      <app-section-heading
+        eyebrow="Česta pitanja"
+        index="08"
+        title="Pitanja o diznama i injektorima"
+        headingId="faq-title"
+        lead="Kratki i jasni odgovori na pitanja koja najčešće čujemo. Ako ne pronađete svoje – javite se."
+      />
+      <div class="faq__help" appReveal>
+        <p class="faq__help-title">Niste pronašli odgovor?</p>
+        <p>Opišite problem i pošaljite podatke o vozilu – odgovorit ćemo s preporukom sljedećeg koraka.</p>
+        <div class="faq__help-actions">
+          <a class="btn btn--primary btn--sm" routerLink="/" fragment="kontakt">Pošalji upit</a>
+          <a class="btn btn--ghost btn--sm" [href]="phoneHref"><app-icon name="phone" [size]="16" /> Nazovi</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq__list">
+      @for (item of faq; track item.q; let i = $index) {
+        <div class="qa" [class.is-open]="open().has(i)" appReveal [appRevealDelay]="(i % 5) * 40">
+          <h3 class="qa__h">
+            <button
+              type="button"
+              class="qa__btn"
+              [id]="'faq-q-' + i"
+              [attr.aria-expanded]="open().has(i)"
+              [attr.aria-controls]="'faq-a-' + i"
+              (click)="toggle(i)"
+            >
+              <span class="qa__num mono" aria-hidden="true">{{ (i + 1).toString().padStart(2, '0') }}</span>
+              <span class="qa__q">{{ item.q }}</span>
+              <span class="qa__icon" aria-hidden="true"><app-icon name="plus" [size]="20" /></span>
+            </button>
+          </h3>
+          <div class="qa__panel" [id]="'faq-a-' + i" role="region" [attr.aria-labelledby]="'faq-q-' + i">
+            <div class="qa__inner">
+              <p>{{ item.a }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

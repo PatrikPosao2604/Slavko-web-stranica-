@@ -1,0 +1,86 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a routerLink="/" [attr.aria-label]="site.name + ' – početna'"><app-logo /></a>
+        <p class="footer__desc">{{ site.description }}</p>
+        @if (site.social.length) {
+          <ul class="footer__social" aria-label="Društvene mreže">
+            @for (s of site.social; track s.url) {
+              <li>
+                <a [href]="s.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="s.label">
+                  <app-icon [name]="s.icon" [size]="18" />
+                </a>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+
+      <nav class="footer__col" aria-labelledby="footer-nav">
+        <h2 id="footer-nav" class="footer__title">Navigacija</h2>
+        <ul>
+          @for (item of nav; track item.label) {
+            <li><a [routerLink]="item.path" [fragment]="item.fragment">{{ item.label }}</a></li>
+          }
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-labelledby="footer-services">
+        <h2 id="footer-services" class="footer__title">Usluge</h2>
+        <ul>
+          @for (s of services; track s.slug) {
+            <li><a [routerLink]="['/usluge', s.slug]">{{ s.title }}</a></li>
+          }
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h2 class="footer__title">Kontakt</h2>
+        <ul class="footer__contact">
+          <li>
+            <app-icon name="map-pin" [size]="18" />
+            <a [href]="mapsLink" target="_blank" rel="noopener noreferrer">{{ address }}</a>
+          </li>
+          <li>
+            <app-icon name="phone" [size]="18" />
+            <a [href]="phoneHref">{{ site.contact.phoneDisplay }}</a>
+          </li>
+          <li>
+            <app-icon name="mail" [size]="18" />
+            <a [href]="emailHref">{{ site.contact.email }}</a>
+          </li>
+        </ul>
+
+        <h2 class="footer__title footer__title--spaced">Radno vrijeme</h2>
+        <dl class="footer__hours">
+          @for (h of site.openingHours; track h.label) {
+            <div>
+              <dt>{{ h.label }}</dt>
+              <dd class="mono">{{ h.hours }}</dd>
+            </div>
+          }
+        </dl>
+      </div>
+    </div>
+
+    <p class="footer__disclaimer">
+      Bosch, Delphi, Denso, Siemens VDO i Continental zaštićeni su znakovi svojih vlasnika. Nazivi
+      se koriste isključivo za označavanje kompatibilnih sustava koje servisiramo i ne podrazumijevaju
+      status ovlaštenog servisa.
+    </p>
+
+    <div class="footer__bottom">
+      <p>
+        © {{ year }} {{ site.legalName }}
+        @if (site.oib) {
+          · OIB {{ site.oib }}
+        }
+      </p>
+      <ul>
+        <li><a routerLink="/pravila-privatnosti">Pravila privatnosti</a></li>
+        <li><a routerLink="/kolacici">Politika kolačića</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

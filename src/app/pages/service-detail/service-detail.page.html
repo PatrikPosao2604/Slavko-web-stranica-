@@ -1,0 +1,93 @@
+@if (service(); as s) {
+  <app-page-hero
+    [title]="s.title"
+    eyebrow="Usluga"
+    [lead]="s.short"
+    [image]="s.image"
+    [crumbs]="[{ label: 'Početna', path: '/' }, { label: 'Usluge', path: '/' }, { label: s.title }]"
+  >
+    <div class="sd__hero-actions">
+      <a class="btn btn--primary" routerLink="/" fragment="kontakt" [queryParams]="{ upit: 'ponuda' }">
+        Zatraži ponudu <app-icon name="arrow-right" [size]="18" class="btn__arrow" />
+      </a>
+      <a class="btn btn--ghost" [href]="phoneHref"><app-icon name="phone" [size]="18" /> Nazovi</a>
+    </div>
+  </app-page-hero>
+
+  <section class="section sd">
+    <div class="container sd__layout">
+      <article class="sd__main">
+        <p class="sd__intro" appReveal>{{ s.intro }}</p>
+
+        <div class="sd__cols">
+          <div class="sd__block" appReveal>
+            <h2 class="sd__h">Što uključuje</h2>
+            <ul class="sd__list">
+              @for (item of s.includes; track item) {
+                <li><app-icon name="check" [size]="18" [stroke]="2" /><span>{{ item }}</span></li>
+              }
+            </ul>
+          </div>
+          <div class="sd__block" appReveal [appRevealDelay]="80">
+            <h2 class="sd__h">Kada je potrebna</h2>
+            <ul class="sd__list sd__list--warn">
+              @for (item of s.whenNeeded; track item) {
+                <li><app-icon name="alert" [size]="18" /><span>{{ item }}</span></li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        @if (s.note) {
+          <aside class="sd__note" appReveal>
+            <app-icon name="shield" [size]="22" />
+            <p>{{ s.note }}</p>
+          </aside>
+        }
+
+        <figure class="sd__figure" appReveal appRevealVariant="image">
+          <app-img key="injectorTesting" sizes="(min-width: 1024px) 60vw, 100vw" />
+          <figcaption class="mono">Svaki zahvat završava kontrolom na testnom stolu.</figcaption>
+        </figure>
+      </article>
+
+      <aside class="sd__side">
+        <div class="sd__card panel">
+          <p class="eyebrow">Upit za uslugu</p>
+          <p class="sd__card-title">{{ s.title }}</p>
+          <p class="sd__card-text">
+            Pošaljite marku, model, godište i motor vozila te opis problema. Javit ćemo vam se s
+            procjenom i prijedlogom sljedećeg koraka.
+          </p>
+          <a class="btn btn--primary btn--block" routerLink="/" fragment="kontakt" [queryParams]="{ upit: 'ponuda' }">
+            Pošalji upit <app-icon name="send" [size]="18" />
+          </a>
+          <a class="btn btn--ghost btn--block" [href]="phoneHref">
+            <app-icon name="phone" [size]="18" /> {{ site.contact.phoneDisplay }}
+          </a>
+        </div>
+
+        <nav class="sd__others" aria-labelledby="sd-others">
+          <h2 id="sd-others" class="sd__others-title mono">Ostale usluge</h2>
+          <ul>
+            @for (o of others(); track o.slug) {
+              <li>
+                <a [routerLink]="['/usluge', o.slug]">
+                  <app-icon [name]="o.icon" [size]="20" />
+                  <span>{{ o.title }}</span>
+                  <app-icon name="arrow-right" [size]="16" class="sd__others-arrow" />
+                </a>
+              </li>
+            }
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <app-process />
+  <app-cta />
+  <div class="sd__spacer"></div>
+} @else {
+  <app-not-found-page />
+}

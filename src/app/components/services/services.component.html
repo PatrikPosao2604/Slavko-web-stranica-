@@ -1,0 +1,38 @@
+<section id="usluge" class="section section--alt services" aria-labelledby="usluge-title">
+  <div class="container">
+    <div class="services__head">
+      <app-section-heading
+        eyebrow="Usluge"
+        index="01"
+        title="Naše usluge"
+        headingId="usluge-title"
+        lead="Od prve dijagnostike do kodiranja nakon ugradnje – cijeli sustav ubrizgavanja na jednom mjestu. Svaki zahvat završava mjerenjem, a ne pretpostavkom."
+      />
+    </div>
+
+    <ul class="services__grid">
+      @for (s of services; track s.slug; let i = $index) {
+        <li class="card" [class.card--featured]="i < 2" appReveal [appRevealDelay]="(i % 4) * 60">
+          <div class="card__media">
+            <app-img
+              [key]="s.image"
+              [sizes]="i < 2 ? '(min-width: 1024px) 45vw, 100vw' : '(min-width: 1024px) 22vw, (min-width: 600px) 45vw, 100vw'"
+              class="card__img"
+            />
+            <span class="card__num mono">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          </div>
+          <div class="card__body">
+            <span class="card__icon"><app-icon [name]="s.icon" [size]="22" /></span>
+            <h3 class="card__title">
+              <a [routerLink]="['/usluge', s.slug]" class="card__link">{{ s.title }}</a>
+            </h3>
+            <p class="card__text">{{ s.short }}</p>
+            <span class="link-arrow card__more" aria-hidden="true">
+              Saznaj više <app-icon name="arrow-right" [size]="16" />
+            </span>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

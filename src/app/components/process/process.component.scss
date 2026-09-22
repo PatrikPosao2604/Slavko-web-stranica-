@@ -1,0 +1,206 @@
+:host {
+  display: block;
+}
+
+.process {
+  overflow: hidden;
+}
+
+.process__bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.process__timeline {
+  --node: 3.5rem;
+  position: relative;
+  padding-left: calc(var(--node) + 1.25rem);
+
+  @media (min-width: 1024px) {
+    padding-left: 0;
+    padding-top: calc(var(--node) + 2rem);
+  }
+}
+
+.process__list {
+  list-style: none;
+  display: grid;
+  gap: 2.5rem;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Linija vremenske crte – vertikalna na mobitelu, horizontalna na desktopu */
+.process__track {
+  position: absolute;
+  left: calc(var(--node) / 2);
+  top: calc(var(--node) / 2);
+  bottom: calc(var(--node) / 2);
+  width: 1px;
+  background: var(--c-line-strong);
+
+  @media (min-width: 1024px) {
+    left: calc(var(--node) / 2);
+    right: 10%;
+    bottom: auto;
+    width: auto;
+    height: 1px;
+  }
+}
+
+.process__progress {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--c-accent), rgba(255, 90, 31, 0.3));
+  transform-origin: top;
+  transition: transform 1.8s var(--ease-out) 0.2s;
+
+  @media (min-width: 1024px) {
+    background: linear-gradient(90deg, var(--c-accent), rgba(255, 90, 31, 0.3));
+    transform-origin: left;
+  }
+}
+
+/* Animacija samo uz JS; bez JS-a linija i čvorovi su odmah aktivni */
+:host-context(.js) .process__timeline:not(.is-visible) .process__progress {
+  transform: scaleY(0);
+
+  @media (min-width: 1024px) {
+    transform: scaleX(0);
+  }
+}
+
+.step {
+  position: relative;
+}
+
+.step__node {
+  position: absolute;
+  left: calc((var(--node) + 1.25rem) * -1);
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--node);
+  height: var(--node);
+  border-radius: 50%;
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-bg);
+  transition:
+    border-color 0.5s,
+    box-shadow 0.5s,
+    background 0.5s;
+  transition-delay: calc(var(--i) * 0.3s + 0.3s);
+
+  @media (min-width: 1024px) {
+    left: 0;
+    top: calc((var(--node) + 2rem) * -1);
+  }
+}
+
+.process__timeline.is-visible .step__node,
+:host-context(html:not(.js)) .step__node {
+  border-color: var(--c-accent);
+  background: #140c09;
+  box-shadow: 0 0 0 6px rgba(255, 90, 31, 0.08);
+}
+
+.step__num {
+  font-size: 0.85rem;
+  color: var(--c-text);
+}
+
+.step__body {
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--c-line);
+  background: linear-gradient(180deg, var(--c-surface), rgba(20, 22, 26, 0.4));
+  transition:
+    border-color 0.4s,
+    transform 0.5s var(--ease-out);
+
+  &:hover {
+    border-color: var(--c-line-strong);
+    transform: translateY(-3px);
+  }
+}
+
+.step--measure .step__body {
+  border-color: rgba(255, 90, 31, 0.3);
+  background: linear-gradient(180deg, rgba(255, 90, 31, 0.07), rgba(20, 22, 26, 0.4));
+}
+
+.step__icon {
+  display: inline-flex;
+  color: var(--c-accent);
+  margin-bottom: 1rem;
+}
+
+.step__title {
+  font-size: 1.5rem;
+}
+
+.step__text {
+  margin-top: 0.7rem;
+  font-size: 0.92rem;
+  color: var(--c-text-muted);
+}
+
+.step__tag {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  border: 1px solid rgba(255, 90, 31, 0.35);
+  border-radius: 999px;
+}
+
+.process__note {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: clamp(3rem, 5vw, 4.5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 90, 31, 0.35);
+  background:
+    radial-gradient(80% 140% at 0% 0%, rgba(255, 90, 31, 0.14), transparent 60%), var(--c-surface);
+  color: var(--c-text-muted);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+}
+
+.process__note-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+  background: var(--c-accent);
+  color: #0b0c0e;
+}
+
+.process__note-title {
+  font-family: var(--ff-display);
+  font-size: clamp(1.6rem, 1.3rem + 1vw, 2.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--c-text);
+  margin-bottom: 0.75rem;
+}

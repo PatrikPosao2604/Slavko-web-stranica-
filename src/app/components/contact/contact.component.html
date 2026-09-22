@@ -1,0 +1,271 @@
+<section id="kontakt" class="section contact" aria-labelledby="kontakt-title">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Kontakt"
+      index="09"
+      title="Pošaljite upit"
+      headingId="kontakt-title"
+      lead="Što više podataka o vozilu i problemu pošaljete, to preciznije možemo procijeniti sljedeći korak. Fotografije kontrolne lampice, očitanih grešaka ili korekcija su dobrodošle."
+    />
+
+    <div class="contact__layout">
+      <!-- ============ Podaci ============ -->
+      <aside class="contact__info" appReveal>
+        <ul class="info">
+          <li>
+            <span class="info__icon"><app-icon name="phone" [size]="20" /></span>
+            <span>
+              <span class="info__label">Telefon</span>
+              <a class="info__value" [href]="phoneHref">{{ site.contact.phoneDisplay }}</a>
+            </span>
+          </li>
+          <li>
+            <span class="info__icon"><app-icon name="mail" [size]="20" /></span>
+            <span>
+              <span class="info__label">E-mail</span>
+              <a class="info__value" [href]="emailHref">{{ site.contact.email }}</a>
+            </span>
+          </li>
+          <li>
+            <span class="info__icon"><app-icon name="map-pin" [size]="20" /></span>
+            <span>
+              <span class="info__label">Adresa</span>
+              <a class="info__value" [href]="mapsLink" target="_blank" rel="noopener noreferrer">{{ address }}</a>
+            </span>
+          </li>
+          <li>
+            <span class="info__icon"><app-icon name="clock" [size]="20" /></span>
+            <span class="info__hours">
+              <span class="info__label">Radno vrijeme</span>
+              <dl>
+                @for (h of site.openingHours; track h.label) {
+                  <div>
+                    <dt>{{ h.label }}</dt>
+                    <dd class="mono">{{ h.hours }}</dd>
+                  </div>
+                }
+              </dl>
+            </span>
+          </li>
+        </ul>
+
+        <div class="map">
+          @if (mapLoaded()) {
+            <iframe
+              class="map__frame"
+              [src]="mapSrc"
+              title="Lokacija servisa na Google karti"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          } @else {
+            <div class="map__placeholder">
+              <div class="map__grid" aria-hidden="true"></div>
+              <span class="map__pin" aria-hidden="true"><app-icon name="map-pin" [size]="26" /></span>
+              <p>Karta se učitava tek na vaš zahtjev (Google Maps postavlja vlastite kolačiće).</p>
+              <div class="map__actions">
+                <button type="button" class="btn btn--light btn--sm" (click)="mapLoaded.set(true)">Prikaži kartu</button>
+                <a class="btn btn--ghost btn--sm" [href]="mapsLink" target="_blank" rel="noopener noreferrer">
+                  Otvori u Google Maps <app-icon name="arrow-up-right" [size]="14" />
+                </a>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="info__ship">
+          <app-icon name="package" [size]="22" />
+          <p><strong>Šaljete samo injektore?</strong> Zapakirajte ih zasebno, zaštitite priključke i u paket priložite podatke o vozilu i opis problema.</p>
+        </div>
+      </aside>
+
+      <!-- ============ Forma ============ -->
+      <div class="contact__form-wrap panel" appReveal [appRevealDelay]="100">
+        @if (status() === 'sent') {
+          <div class="result" role="status" aria-live="polite">
+            <span class="result__icon result__icon--ok"><app-icon name="check" [size]="32" [stroke]="2" /></span>
+            <h3>Upit je poslan</h3>
+            <p>Hvala! Javit ćemo vam se čim pregledamo podatke – telefonom ili e-mailom.</p>
+            <button type="button" class="btn btn--ghost" (click)="resetStatus()">Pošalji novi upit</button>
+          </div>
+        } @else if (status() === 'mailto') {
+          <div class="result" role="status" aria-live="polite">
+            <span class="result__icon result__icon--ok"><app-icon name="mail" [size]="30" /></span>
+            <h3>Otvoren je vaš e-mail klijent</h3>
+            <p>
+              Upit je pripremljen u novoj e-mail poruci – samo je pošaljite.
+              @if (files().length) {
+                Ne zaboravite ručno priložiti {{ files().length }} odabran{{ files().length === 1 ? 'u datoteku' : 'e datoteke' }}.
+              }
+              Ako se ništa nije otvorilo, pišite nam na <a [href]="emailHref">{{ site.contact.email }}</a>.
+            </p>
+            <button type="button" class="btn btn--ghost" (click)="resetStatus()">Natrag na formu</button>
+          </div>
+        } @else {
+          <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate aria-labelledby="kontakt-title">
+            @if (status() === 'error') {
+              <div class="form__alert" role="alert">
+                <app-icon name="alert" [size]="20" />
+                <p>Slanje nije uspjelo. Pokušajte ponovno ili nas nazovite na <a [href]="phoneHref">{{ site.contact.phoneDisplay }}</a>.</p>
+              </div>
+            }
+
+            <fieldset class="form__types">
+              <legend class="form__legend">Vrsta upita</legend>
+              <div class="seg">
+                @for (t of types; track t.id) {
+                  <label class="seg__opt">
+                    <input type="radio" formControlName="type" [value]="t.id" />
+                    <span>{{ t.label }}</span>
+                  </label>
+                }
+              </div>
+            </fieldset>
+
+            <fieldset class="form__group">
+              <legend class="form__legend">Vaši podaci</legend>
+              <div class="form__grid">
+                <div class="field field--full">
+                  <label for="f-name">Ime i prezime <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-name" type="text" formControlName="fullName" autocomplete="name"
+                    [attr.aria-invalid]="!!error('fullName')" [attr.aria-describedby]="error('fullName') ? 'e-name' : null" required />
+                  @if (error('fullName'); as e) { <p class="field__error" id="e-name">{{ e }}</p> }
+                </div>
+                <div class="field">
+                  <label for="f-phone">Telefon <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-phone" type="tel" formControlName="phone" autocomplete="tel" inputmode="tel" placeholder="+385 9x xxx xxxx"
+                    [attr.aria-invalid]="!!error('phone')" [attr.aria-describedby]="error('phone') ? 'e-phone' : null" required />
+                  @if (error('phone'); as e) { <p class="field__error" id="e-phone">{{ e }}</p> }
+                </div>
+                <div class="field">
+                  <label for="f-email">E-mail <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-email" type="email" formControlName="email" autocomplete="email" inputmode="email"
+                    [attr.aria-invalid]="!!error('email')" [attr.aria-describedby]="error('email') ? 'e-email' : null" required />
+                  @if (error('email'); as e) { <p class="field__error" id="e-email">{{ e }}</p> }
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="form__group">
+              <legend class="form__legend">Vozilo</legend>
+              <div class="form__grid">
+                <div class="field">
+                  <label for="f-make">Marka vozila <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-make" type="text" formControlName="make" placeholder="npr. Volkswagen"
+                    [attr.aria-invalid]="!!error('make')" [attr.aria-describedby]="error('make') ? 'e-make' : null" required />
+                  @if (error('make'); as e) { <p class="field__error" id="e-make">{{ e }}</p> }
+                </div>
+                <div class="field">
+                  <label for="f-model">Model <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-model" type="text" formControlName="model" placeholder="npr. Golf VII"
+                    [attr.aria-invalid]="!!error('model')" [attr.aria-describedby]="error('model') ? 'e-model' : null" required />
+                  @if (error('model'); as e) { <p class="field__error" id="e-model">{{ e }}</p> }
+                </div>
+                <div class="field">
+                  <label for="f-year">Godište</label>
+                  <input id="f-year" type="text" formControlName="year" inputmode="numeric" maxlength="4" [placeholder]="'npr. 2015'"
+                    [attr.aria-invalid]="!!error('year')" [attr.aria-describedby]="error('year') ? 'e-year' : null" />
+                  @if (error('year'); as e) { <p class="field__error" id="e-year">{{ e }}</p> }
+                </div>
+                <div class="field">
+                  <label for="f-engine">Motor</label>
+                  <input id="f-engine" type="text" formControlName="engine" placeholder="npr. 2.0 TDI, 110 kW"
+                    [attr.aria-invalid]="!!error('engine')" [attr.aria-describedby]="error('engine') ? 'e-engine' : 'h-engine'" />
+                  @if (error('engine'); as e) { <p class="field__error" id="e-engine">{{ e }}</p> }
+                  @else { <p class="field__hint" id="h-engine">Oznaka motora ili snaga iz prometne dozvole.</p> }
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="field field--full">
+              <label for="f-message">Opis problema <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="f-message" rows="5" formControlName="message"
+                placeholder="Što primjećujete, kada se problem javlja, je li se vozilo već dijagnosticiralo…"
+                [attr.aria-invalid]="!!error('message')" [attr.aria-describedby]="error('message') ? 'e-message' : 'h-message'" required></textarea>
+              <div class="field__meta">
+                @if (error('message'); as e) { <p class="field__error" id="e-message">{{ e }}</p> }
+                @else { <p class="field__hint" id="h-message">Najmanje 20 znakova.</p> }
+                <span class="field__count mono" aria-hidden="true">{{ messageLength() }}/3000</span>
+              </div>
+            </div>
+
+            <!-- Upload -->
+            <div class="field field--full">
+              <span class="field__label" id="upload-label">Fotografije ili dokumenti <span class="field__opt">(neobavezno)</span></span>
+              <label
+                class="drop"
+                [class.is-over]="dragOver()"
+                (dragover)="onDragOver($event)"
+                (dragleave)="dragOver.set(false)"
+                (drop)="onDrop($event)"
+              >
+                <input
+                  type="file"
+                  class="drop__input"
+                  multiple
+                  [accept]="site.upload.accept"
+                  (change)="onFileInput($event)"
+                  aria-labelledby="upload-label"
+                  aria-describedby="upload-hint"
+                />
+                <span class="drop__icon" aria-hidden="true"><app-icon name="upload" [size]="24" /></span>
+                <span class="drop__text"><strong>Odaberite datoteke</strong> ili ih povucite ovdje</span>
+                <span class="drop__hint" id="upload-hint">
+                  JPG, PNG, WEBP, HEIC ili PDF · do {{ site.upload.maxFiles }} datoteka · max {{ site.upload.maxFileSizeMb }} MB po datoteci
+                </span>
+              </label>
+              @if (fileError(); as fe) {
+                <p class="field__error" role="alert">{{ fe }}</p>
+              }
+              @if (files().length) {
+                <ul class="files" aria-label="Odabrane datoteke">
+                  @for (f of files(); track f.name + f.size; let i = $index) {
+                    <li class="files__item">
+                      <app-icon name="file" [size]="18" />
+                      <span class="files__name">{{ f.name }}</span>
+                      <span class="files__size mono">{{ formatSize(f.size) }}</span>
+                      <button type="button" class="files__remove" (click)="removeFile(i)" [attr.aria-label]="'Ukloni datoteku ' + f.name">
+                        <app-icon name="x" [size]="16" />
+                      </button>
+                    </li>
+                  }
+                </ul>
+              }
+            </div>
+
+            <!-- Honeypot -->
+            <div class="hp" aria-hidden="true">
+              <label for="f-website">Web stranica</label>
+              <input id="f-website" type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="field field--full">
+              <label class="check">
+                <input type="checkbox" formControlName="consent"
+                  [attr.aria-invalid]="!!error('consent')" [attr.aria-describedby]="error('consent') ? 'e-consent' : null" />
+                <span class="check__box" aria-hidden="true"><app-icon name="check" [size]="14" [stroke]="2.5" /></span>
+                <span class="check__text">
+                  Slažem se da se moji podaci koriste isključivo za odgovor na ovaj upit, sukladno
+                  <a href="/pravila-privatnosti" target="_blank">pravilima privatnosti</a>. <span class="req" aria-hidden="true">*</span>
+                </span>
+              </label>
+              @if (error('consent'); as e) { <p class="field__error" id="e-consent">{{ e }}</p> }
+            </div>
+
+            <div class="form__submit">
+              <button type="submit" class="btn btn--primary form__btn" [disabled]="status() === 'sending'">
+                @if (status() === 'sending') {
+                  <span class="spinner" aria-hidden="true"></span> Šaljem…
+                } @else {
+                  Pošalji upit <app-icon name="send" [size]="18" class="btn__arrow" />
+                }
+              </button>
+              <p class="form__note"><span class="req">*</span> Obavezna polja</p>
+            </div>
+          </form>
+        }
+      </div>
+    </div>
+  </div>
+</section>

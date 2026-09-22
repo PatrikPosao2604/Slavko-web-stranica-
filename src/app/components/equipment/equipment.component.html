@@ -1,0 +1,56 @@
+<section id="oprema" class="section equipment" aria-labelledby="oprema-title">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Oprema i tehnologija"
+      index="04"
+      title="Opremljeni za preciznost"
+      headingId="oprema-title"
+      lead="Profesionalna reparacija ne svodi se na zamjenu dijelova. Razlika između ispravne i neispravne dizne mjeri se u mikronima i milimetrima kubnim – zato se svaki korak oslanja na mjerenje, a ne na procjenu."
+    />
+
+    <div class="equipment__layout">
+      <div class="equipment__visual" appReveal appRevealVariant="image">
+        @for (item of items; track item.title; let i = $index) {
+          @if (item.image) {
+            <app-img
+              [key]="item.image"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              class="equipment__img"
+              [class.is-active]="active() === i"
+              [decorative]="active() !== i"
+            />
+          }
+        }
+        <div class="equipment__overlay" aria-hidden="true">
+          <span class="mono">{{ (active() + 1).toString().padStart(2, '0') }} / {{ items.length.toString().padStart(2, '0') }}</span>
+          <span class="equipment__overlay-title">{{ activeItem().title }}</span>
+        </div>
+        <span class="equipment__corner equipment__corner--tl" aria-hidden="true"></span>
+        <span class="equipment__corner equipment__corner--br" aria-hidden="true"></span>
+      </div>
+
+      <ul class="equipment__list" aria-label="Oprema">
+        @for (item of items; track item.title; let i = $index) {
+          <li>
+            <button
+              type="button"
+              class="eq"
+              [class.is-active]="active() === i"
+              [attr.aria-pressed]="active() === i"
+              (click)="active.set(i)"
+              (mouseenter)="active.set(i)"
+              (focus)="active.set(i)"
+            >
+              <span class="eq__icon"><app-icon [name]="item.icon" [size]="22" /></span>
+              <span class="eq__content">
+                <span class="eq__title">{{ item.title }}</span>
+                <span class="eq__text">{{ item.text }}</span>
+              </span>
+              <span class="eq__num mono" aria-hidden="true">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>

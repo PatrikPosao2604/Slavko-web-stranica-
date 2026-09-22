@@ -1,0 +1,97 @@
+<header class="header" [class.header--scrolled]="scrolled() || menuOpen()" [class.header--open]="menuOpen()">
+  <div class="header__bar">
+    <div class="container header__inner">
+      <a routerLink="/" fragment="pocetak" class="header__logo" [attr.aria-label]="site.name + ' – početna'" (click)="onNavClick(homeNav)">
+        <app-logo />
+      </a>
+
+      <nav class="header__nav" aria-label="Glavna navigacija">
+        <ul>
+          @for (item of nav; track item.label) {
+            <li>
+              @if (item.fragment) {
+                <a
+                  [routerLink]="item.path"
+                  [fragment]="item.fragment"
+                  class="header__link"
+                  [class.is-active]="isActive(item)"
+                  [attr.aria-current]="isActive(item) ? 'location' : null"
+                  (click)="onNavClick(item)"
+                  >{{ item.label }}</a
+                >
+              } @else {
+                <a
+                  [routerLink]="item.path"
+                  class="header__link"
+                  routerLinkActive="is-active"
+                  ariaCurrentWhenActive="page"
+                  >{{ item.label }}</a
+                >
+              }
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a class="header__phone" [href]="phoneHref">
+          <app-icon name="phone" [size]="18" />
+          <span>{{ site.contact.phoneDisplay }}</span>
+        </a>
+        <a routerLink="/" fragment="kontakt" class="btn btn--primary btn--sm header__cta" (click)="onNavClick(contactNav)">
+          Zatraži ponudu
+        </a>
+        <button
+          type="button"
+          class="header__burger"
+          [attr.aria-expanded]="menuOpen()"
+          aria-controls="mobile-menu"
+          [attr.aria-label]="menuOpen() ? 'Zatvori izbornik' : 'Otvori izbornik'"
+          (click)="toggleMenu()"
+        >
+          <span class="burger" [class.burger--open]="menuOpen()" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobilni izbornik – izvan elementa s backdrop-filterom kako bi position:fixed radio ispravno -->
+  <div
+    id="mobile-menu"
+    class="menu"
+    [class.menu--open]="menuOpen()"
+    [attr.aria-hidden]="!menuOpen()"
+    [attr.inert]="menuOpen() ? null : ''"
+  >
+    <nav class="menu__nav" aria-label="Mobilna navigacija">
+      <ol>
+        @for (item of nav; track item.label; let i = $index) {
+          <li [style.--i]="i">
+            @if (item.fragment) {
+              <a [routerLink]="item.path" [fragment]="item.fragment" (click)="onNavClick(item)" [class.is-active]="isActive(item)">
+                <span class="menu__num mono">0{{ i + 1 }}</span>{{ item.label }}
+              </a>
+            } @else {
+              <a [routerLink]="item.path" routerLinkActive="is-active" (click)="closeMenu()">
+                <span class="menu__num mono">0{{ i + 1 }}</span>{{ item.label }}
+              </a>
+            }
+          </li>
+        }
+      </ol>
+    </nav>
+    <div class="menu__footer">
+      <a class="btn btn--primary btn--block" routerLink="/" fragment="kontakt" (click)="onNavClick(contactNav)">
+        Zatraži ponudu <app-icon name="arrow-right" [size]="18" class="btn__arrow" />
+      </a>
+      <a class="btn btn--ghost btn--block" [href]="phoneHref">
+        <app-icon name="phone" [size]="18" /> {{ site.contact.phoneDisplay }}
+      </a>
+      <p class="menu__hours mono">
+        {{ site.openingHours[0].label }} · {{ site.openingHours[0].hours }}
+      </p>
+    </div>
+  </div>
+</header>

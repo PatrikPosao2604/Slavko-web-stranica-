@@ -1,0 +1,169 @@
+:host {
+  display: block;
+}
+
+.usp {
+  padding-block: clamp(4.5rem, 3rem + 5vw, 8rem) var(--section-y);
+}
+
+.usp__intro {
+  display: grid;
+  gap: 1.5rem;
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+
+  @media (min-width: 900px) {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.usp__title {
+  font-size: var(--fs-h2);
+}
+
+.usp__grid {
+  list-style: none;
+  display: grid;
+  gap: 1px;
+  background: var(--c-line);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1240px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.usp__card {
+  position: relative;
+  padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.5rem, 2.5vw, 2rem);
+  background: var(--c-bg);
+  transition: background 0.4s var(--ease-out);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--c-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  &:hover {
+    background: var(--c-surface);
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .usp__icon {
+      color: var(--c-accent);
+      border-color: rgba(255, 90, 31, 0.4);
+    }
+  }
+
+  p {
+    margin-top: 0.75rem;
+    font-size: 0.93rem;
+    color: var(--c-text-muted);
+  }
+
+  // Zadnja kartica preko dva stupca na 2- i 3-stupčanom layoutu
+  @media (min-width: 600px) and (max-width: 899px) {
+    &:last-child {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: 900px) and (max-width: 1239px) {
+    &:nth-child(4) {
+      grid-column: span 1;
+    }
+    &:last-child {
+      grid-column: span 2;
+    }
+  }
+}
+
+.usp__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, var(--c-surface-3), var(--c-surface));
+  color: var(--c-text);
+  transition:
+    color 0.4s,
+    border-color 0.4s;
+}
+
+.usp__card-title {
+  font-size: 1.45rem;
+}
+
+.usp__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: clamp(3rem, 6vw, 5rem) 0 0;
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.usp__stat {
+  padding: 1.5rem 1rem 1.5rem 0;
+  border-top: 1px solid var(--c-line-strong);
+
+  dd {
+    margin: 0;
+  }
+
+  @media (min-width: 900px) {
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--c-line);
+
+    &:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+}
+
+.usp__num {
+  display: block;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: clamp(2.8rem, 2rem + 3.5vw, 5rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.usp__label {
+  display: block;
+  margin-top: 0.6rem;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-dim);
+}

@@ -1,0 +1,51 @@
+<section id="galerija" class="section gallery" aria-labelledby="galerija-title">
+  <div class="container">
+    <div class="gallery__head">
+      <app-section-heading
+        eyebrow="Galerija"
+        index="06"
+        title="Iz radionice"
+        headingId="galerija-title"
+        lead="Injektori, testiranje, reparacija i detalji koje inače ne vidite. Kliknite fotografiju za prikaz preko cijelog ekrana."
+      />
+
+      <div class="gallery__filters" role="group" aria-label="Filtriraj galeriju">
+        @for (c of categories; track c.id) {
+          <button
+            type="button"
+            class="chip"
+            [class.is-active]="filter() === c.id"
+            [attr.aria-pressed]="filter() === c.id"
+            (click)="filter.set(c.id)"
+          >
+            {{ c.label }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <ul class="gallery__grid">
+      @for (item of items(); track item.image + item.caption; let i = $index) {
+        <li class="tile" [class.tile--wide]="item.wide" [class.tile--tall]="item.tall" appReveal [appRevealDelay]="(i % 4) * 50">
+          <button type="button" class="tile__btn" (click)="open(i, $any($event.currentTarget))" [attr.aria-label]="'Otvori fotografiju: ' + item.caption">
+            <app-img
+              [key]="item.image"
+              class="tile__img"
+              [sizes]="item.wide ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 1024px) 25vw, 50vw'"
+            />
+            <span class="tile__overlay" aria-hidden="true">
+              <span class="tile__caption">{{ item.caption }}</span>
+              <span class="tile__zoom"><app-icon name="expand" [size]="18" /></span>
+            </span>
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+
+  @defer (when openIndex() !== null; prefetch on idle) {
+    @if (openIndex() !== null) {
+      <app-lightbox [items]="items()" [(index)]="openIndex" (closed)="close()" />
+    }
+  }
+</section>

@@ -1,0 +1,149 @@
+<section id="simptomi" class="section section--alt symptoms" aria-labelledby="simptomi-title">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Simptomi"
+      index="03"
+      title="Kako prepoznati problem s diznama?"
+      headingId="simptomi-title"
+      lead="Neispravna dizna rijetko otkaže odjednom. Obično se javlja nekoliko znakova koji se s vremenom pojačavaju. Odaberite simptom i pogledajte gdje ga primjećujete."
+    />
+
+    <div class="symptoms__layout">
+      <figure class="symptoms__visual" appReveal>
+        <div class="car">
+          <svg viewBox="0 0 800 320" class="car__svg" role="img" aria-labelledby="car-desc">
+            <title id="car-desc">
+              Shematski prikaz vozila s označenim područjima: motor, kabina, spremnik goriva i ispušni sustav s DPF filterom
+            </title>
+            <defs>
+              <linearGradient id="car-body" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="#2a2e35" />
+                <stop offset="1" stop-color="#15171b" />
+              </linearGradient>
+              <radialGradient id="car-glow">
+                <stop offset="0" stop-color="#ff5a1f" stop-opacity=".55" />
+                <stop offset="1" stop-color="#ff5a1f" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+
+            <!-- tlo -->
+            <line x1="20" y1="282" x2="780" y2="282" class="car__ground" />
+            <ellipse cx="400" cy="284" rx="360" ry="10" fill="#000" opacity=".5" />
+
+            <!-- karoserija -->
+            <path
+              class="car__body"
+              d="M40 228 L40 196 C40 180 55 170 80 166 L205 146 C240 112 275 92 320 86 L480 84 C530 86 575 112 610 146 L700 156 C735 160 752 176 752 200 L752 228 L690 228 A58 58 0 0 0 574 228 L230 228 A58 58 0 0 0 114 228 Z"
+            />
+            <path class="car__glass" d="M228 146 C256 118 286 101 323 97 L396 96 L396 146 Z" />
+            <path class="car__glass" d="M410 96 L478 96 C514 98 546 118 572 146 L410 146 Z" />
+            <line x1="403" y1="96" x2="403" y2="222" class="car__line" />
+            <path d="M205 150 L700 160" class="car__line" />
+
+            <!-- motor + injektori -->
+            <g class="car__zone" [class.is-active]="activeZone() === 'engine'">
+              <rect x="70" y="166" width="130" height="50" rx="6" class="car__part" />
+              <line x1="82" y1="176" x2="188" y2="176" class="car__rail" />
+              @for (x of [95, 122, 149, 176]; track x) {
+                <path [attr.d]="'M' + x + ' 176 L' + x + ' 200 L' + (x - 3) + ' 205 L' + (x + 3) + ' 205 L' + x + ' 200'" class="car__injector" />
+              }
+            </g>
+
+            <!-- kabina / instrumenti -->
+            <g class="car__zone" [class.is-active]="activeZone() === 'cabin'">
+              <path d="M262 150 L330 150 L338 166 L262 166 Z" class="car__part" />
+              <circle cx="300" cy="158" r="4" class="car__led" />
+            </g>
+
+            <!-- spremnik i vod goriva -->
+            <g class="car__zone" [class.is-active]="activeZone() === 'fuel'">
+              <rect x="470" y="196" width="92" height="26" rx="5" class="car__part" />
+              <path d="M470 212 L240 214 L200 206" class="car__fuel" />
+            </g>
+
+            <!-- ispuh + DPF -->
+            <g class="car__zone" [class.is-active]="activeZone() === 'exhaust'">
+              <path d="M200 212 L230 238 L560 240 L740 246 L770 246" class="car__pipe" />
+              <rect x="258" y="230" width="70" height="18" rx="6" class="car__part" />
+              <text x="293" y="243" class="car__label">DPF</text>
+              <g class="car__smoke">
+                <circle cx="782" cy="240" r="7" />
+                <circle cx="794" cy="230" r="9" />
+              </g>
+            </g>
+
+            <!-- kotači -->
+            @for (cx of [172, 632]; track cx) {
+              <g>
+                <circle [attr.cx]="cx" cy="232" r="46" class="car__tyre" />
+                <circle [attr.cx]="cx" cy="232" r="28" class="car__rim" />
+                <circle [attr.cx]="cx" cy="232" r="6" class="car__hub" />
+              </g>
+            }
+
+            <!-- točke (hotspotovi) -->
+            @for (h of hotspots; track h.zone) {
+              <g class="hotspot" [class.is-active]="activeZone() === h.zone" [attr.transform]="'translate(' + h.x + ' ' + h.y + ')'">
+                <circle r="34" fill="url(#car-glow)" class="hotspot__glow" />
+                <circle r="16" class="hotspot__ring" />
+                <circle r="6" class="hotspot__dot" />
+              </g>
+            }
+          </svg>
+        </div>
+
+        <figcaption class="zones" aria-label="Područja vozila">
+          @for (h of hotspots; track h.zone) {
+            <button
+              type="button"
+              class="zone-btn"
+              [class.is-active]="activeZone() === h.zone"
+              [attr.aria-pressed]="activeZone() === h.zone"
+              (click)="toggleZone(h.zone)"
+            >
+              <span class="zone-btn__dot" aria-hidden="true"></span>
+              {{ zones[h.zone].label }}
+              <span class="zone-btn__count mono">{{ zoneCount()[h.zone] }}</span>
+            </button>
+          }
+        </figcaption>
+      </figure>
+
+      <div class="symptoms__list-wrap">
+        <ul class="symptoms__list" (mouseleave)="selectSymptom(null)">
+          @for (s of symptoms; track s.title; let i = $index) {
+            <li appReveal [appRevealDelay]="(i % 2) * 60">
+              <button
+                type="button"
+                class="symptom"
+                [class.is-active]="activeIndex() === i"
+                [class.is-dim]="activeZone() !== null && activeZone() !== s.zone"
+                [attr.aria-pressed]="activeIndex() === i"
+                (mouseenter)="selectSymptom(i)"
+                (focus)="selectSymptom(i)"
+                (click)="selectSymptom(activeIndex() === i ? null : i)"
+              >
+                <span class="symptom__icon"><app-icon [name]="s.icon" [size]="22" /></span>
+                <span class="symptom__content">
+                  <span class="symptom__title">{{ s.title }}</span>
+                  <span class="symptom__text">{{ s.text }}</span>
+                </span>
+              </button>
+            </li>
+          }
+        </ul>
+
+        <div class="symptoms__cta" appReveal>
+          <p>
+            <strong>Prepoznajete jedan ili više simptoma?</strong>
+            Dijagnostika i test povrata brzo pokazuju jesu li uzrok dizne – prije nego što se išta
+            skida s motora.
+          </p>
+          <a class="btn btn--primary" routerLink="/" fragment="kontakt" [queryParams]="{ upit: 'termin' }">
+            Dogovori dijagnostiku <app-icon name="arrow-right" [size]="18" class="btn__arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
