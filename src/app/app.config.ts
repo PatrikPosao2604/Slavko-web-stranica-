@@ -9,8 +9,11 @@ import {
   provideRouter,
   withComponentInputBinding,
   withInMemoryScrolling,
+  withHashLocation,
   withViewTransitions,
 } from '@angular/router';
+
+import { environment } from '../environments/environment';
 
 import { routes } from './app.routes';
 
@@ -23,8 +26,9 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
       withViewTransitions({ skipInitialTransition: true }),
+      ...(environment.hashRouting ? [withHashLocation()] : []),
     ),
     provideHttpClient(withFetch()),
-    provideClientHydration(withEventReplay()),
+    ...(environment.hydration ? [provideClientHydration(withEventReplay())] : []),
   ],
 };

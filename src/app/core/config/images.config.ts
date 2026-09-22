@@ -31,7 +31,8 @@ export interface ImageAsset {
   responsive?: boolean;
 }
 
-const BASE = '/assets/images/';
+// Relativna putanja (razrješava se prema <base href>)
+const BASE = 'assets/images/';
 
 function img(
   file: string,

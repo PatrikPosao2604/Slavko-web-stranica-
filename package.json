@@ -11,7 +11,8 @@
     "images": "node scripts/generate-placeholder-images.mjs",
     "format": "prettier --write \"src/**/*.{ts,html,scss}\"",
     "prebuild": "node scripts/generate-sitemap.mjs",
-    "sitemap": "node scripts/generate-sitemap.mjs"
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "build:preview": "ng build --configuration preview"
   },
   "private": true,
   "packageManager": "npm@10.9.7",

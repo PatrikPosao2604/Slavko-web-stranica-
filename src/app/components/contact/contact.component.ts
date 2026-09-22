@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   EMAIL_HREF,
   FULL_ADDRESS,
@@ -29,7 +29,7 @@ type Status = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule, IconComponent, SectionHeadingComponent, RevealDirective],
+  imports: [ReactiveFormsModule, RouterLink, IconComponent, SectionHeadingComponent, RevealDirective],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

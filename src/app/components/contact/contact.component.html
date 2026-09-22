@@ -247,7 +247,7 @@
                 <span class="check__box" aria-hidden="true"><app-icon name="check" [size]="14" [stroke]="2.5" /></span>
                 <span class="check__text">
                   Slažem se da se moji podaci koriste isključivo za odgovor na ovaj upit, sukladno
-                  <a href="/pravila-privatnosti" target="_blank">pravilima privatnosti</a>. <span class="req" aria-hidden="true">*</span>
+                  <a routerLink="/pravila-privatnosti">pravilima privatnosti</a>. <span class="req" aria-hidden="true">*</span>
                 </span>
               </label>
               @if (error('consent'); as e) { <p class="field__error" id="e-consent">{{ e }}</p> }
