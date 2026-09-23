@@ -115,6 +115,62 @@ export const IMAGES = {
   ),
   car: img('car-diesel.webp', 'Osobno vozilo s diesel motorom spremno za dijagnostiku', 1600, 900),
 
+  // --- Iz radionice (stvarne fotografije) ------------------------------------
+  injectorBatchCaliper: img(
+    'injector-batch-caliper.webp',
+    'Četiri Common Rail injektora poredana na radnom stolu spremna za mjerenje',
+    1600,
+    900,
+  ),
+  injectorNozzleTips: img(
+    'injector-nozzle-tips.webp',
+    'Makro snimka vrhova injektora s brtvenim prstenima i serijskim oznakama',
+    1600,
+    2133,
+  ),
+  injectorTesterScreen: img(
+    'injector-tester-screen.webp',
+    'Injektori spojeni na Mega Tester uređaj tijekom ispitivanja',
+    1600,
+    2133,
+  ),
+  workshopWorkbench: img(
+    'workshop-workbench.webp',
+    'Radni stol servisa s alatom, mjernim priborom i ormarićima',
+    1600,
+    2354,
+  ),
+  workshopTestStations: img(
+    'workshop-test-stations.webp',
+    'Radionica s Hartridge Sabre CRi Expert uređajem i velikim ekranom za dijagnostiku',
+    1600,
+    1200,
+  ),
+  injectorPressGauge: img(
+    'injector-press-gauge.webp',
+    'Hidraulična preša DX75620 s manometrom za ispitivanje injektora',
+    1600,
+    2843,
+  ),
+  injectorCodingStation: img(
+    'injector-coding-station.webp',
+    'Bosch DCI 200 stanica za kodiranje injektora uz radni stol s alatom',
+    1600,
+    1200,
+  ),
+  injectorTestFixture: img(
+    'injector-test-fixture.webp',
+    'Ispitna naprava DX75165 za provjeru dizni na radnom stolu',
+    1600,
+    2843,
+  ),
+  injectorTestReports: img(
+    'injector-test-reports.webp',
+    'Injektori poredani preko ispisanih zapisnika o ispitivanju',
+    1600,
+    2168,
+  ),
+
   // --- Prije / poslije --------------------------------------------------------
   before: img(
     'before-repair.webp',

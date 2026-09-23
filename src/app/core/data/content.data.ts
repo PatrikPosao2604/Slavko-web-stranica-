@@ -306,6 +306,60 @@ export const GALLERY: GalleryItem[] = [
   { image: 'car', caption: 'Vozilo na dijagnostici', category: 'radionica', wide: true },
   { image: 'before', caption: 'Dizna prije reparacije', category: 'reparacija', wide: true },
   { image: 'after', caption: 'Dizna nakon reparacije', category: 'reparacija', wide: true },
+  {
+    image: 'injectorBatchCaliper',
+    caption: 'Injektori spremni za mjerenje',
+    category: 'injektori',
+    wide: true,
+  },
+  {
+    image: 'injectorNozzleTips',
+    caption: 'Vrhovi injektora s oznakama',
+    category: 'injektori',
+    tall: true,
+  },
+  {
+    image: 'injectorTesterScreen',
+    caption: 'Ispitivanje na Mega Tester uređaju',
+    category: 'testiranje',
+    tall: true,
+  },
+  {
+    image: 'workshopWorkbench',
+    caption: 'Radni stol servisa',
+    category: 'radionica',
+    tall: true,
+  },
+  {
+    image: 'injectorTestReports',
+    caption: 'Injektori uz zapisnike ispitivanja',
+    category: 'testiranje',
+    tall: true,
+  },
+  {
+    image: 'workshopTestStations',
+    caption: 'Radne stanice za testiranje injektora',
+    category: 'radionica',
+    wide: true,
+  },
+  {
+    image: 'injectorPressGauge',
+    caption: 'Hidraulična preša s manometrom',
+    category: 'testiranje',
+    tall: true,
+  },
+  {
+    image: 'injectorCodingStation',
+    caption: 'Bosch stanica za kodiranje injektora',
+    category: 'radionica',
+    wide: true,
+  },
+  {
+    image: 'injectorTestFixture',
+    caption: 'Ispitna naprava za dizne',
+    category: 'testiranje',
+    tall: true,
+  },
 ];
 
 /* --------------------------------------------------------------------------
