@@ -4,7 +4,11 @@ import {
   provideZonelessChangeDetection,
 } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+  provideClientHydration,
+  withEventReplay,
+  withNoIncrementalHydration,
+} from '@angular/platform-browser';
 import {
   provideRouter,
   withComponentInputBinding,
@@ -29,6 +33,8 @@ export const appConfig: ApplicationConfig = {
       ...(environment.hashRouting ? [withHashLocation()] : []),
     ),
     provideHttpClient(withFetch()),
-    ...(environment.hydration ? [provideClientHydration(withEventReplay())] : []),
+    ...(environment.hydration
+      ? [provideClientHydration(withEventReplay(), withNoIncrementalHydration())]
+      : []),
   ],
 };
