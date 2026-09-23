@@ -306,6 +306,36 @@ export const GALLERY: GalleryItem[] = [
   { image: 'car', caption: 'Vozilo na dijagnostici', category: 'radionica', wide: true },
   { image: 'before', caption: 'Dizna prije reparacije', category: 'reparacija', wide: true },
   { image: 'after', caption: 'Dizna nakon reparacije', category: 'reparacija', wide: true },
+  {
+    image: 'injectorBatchCaliper',
+    caption: 'Injektori spremni za mjerenje',
+    category: 'injektori',
+    wide: true,
+  },
+  {
+    image: 'injectorNozzleTips',
+    caption: 'Vrhovi injektora s oznakama',
+    category: 'injektori',
+    tall: true,
+  },
+  {
+    image: 'injectorTesterScreen',
+    caption: 'Ispitivanje na Mega Tester uređaju',
+    category: 'testiranje',
+    tall: true,
+  },
+  {
+    image: 'workshopWorkbench',
+    caption: 'Radni stol servisa',
+    category: 'radionica',
+    tall: true,
+  },
+  {
+    image: 'injectorTestReports',
+    caption: 'Injektori uz zapisnike ispitivanja',
+    category: 'testiranje',
+    tall: true,
+  },
 ];
 
 /* --------------------------------------------------------------------------
