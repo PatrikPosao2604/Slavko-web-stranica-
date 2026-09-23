@@ -336,6 +336,30 @@ export const GALLERY: GalleryItem[] = [
     category: 'testiranje',
     tall: true,
   },
+  {
+    image: 'workshopTestStations',
+    caption: 'Radne stanice za testiranje injektora',
+    category: 'radionica',
+    wide: true,
+  },
+  {
+    image: 'injectorPressGauge',
+    caption: 'Hidraulična preša s manometrom',
+    category: 'testiranje',
+    tall: true,
+  },
+  {
+    image: 'injectorCodingStation',
+    caption: 'Bosch stanica za kodiranje injektora',
+    category: 'radionica',
+    wide: true,
+  },
+  {
+    image: 'injectorTestFixture',
+    caption: 'Ispitna naprava za dizne',
+    category: 'testiranje',
+    tall: true,
+  },
 ];
 
 /* --------------------------------------------------------------------------

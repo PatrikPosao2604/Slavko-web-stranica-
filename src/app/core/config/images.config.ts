@@ -140,6 +140,30 @@ export const IMAGES = {
     1600,
     2354,
   ),
+  workshopTestStations: img(
+    'workshop-test-stations.webp',
+    'Radionica s Hartridge Sabre CRi Expert uređajem i velikim ekranom za dijagnostiku',
+    1600,
+    1200,
+  ),
+  injectorPressGauge: img(
+    'injector-press-gauge.webp',
+    'Hidraulična preša DX75620 s manometrom za ispitivanje injektora',
+    1600,
+    2843,
+  ),
+  injectorCodingStation: img(
+    'injector-coding-station.webp',
+    'Bosch DCI 200 stanica za kodiranje injektora uz radni stol s alatom',
+    1600,
+    1200,
+  ),
+  injectorTestFixture: img(
+    'injector-test-fixture.webp',
+    'Ispitna naprava DX75165 za provjeru dizni na radnom stolu',
+    1600,
+    2843,
+  ),
   injectorTestReports: img(
     'injector-test-reports.webp',
     'Injektori poredani preko ispisanih zapisnika o ispitivanju',
