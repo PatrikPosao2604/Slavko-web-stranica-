@@ -104,10 +104,15 @@ export const SITE = {
 
   /**
    * Brojke za animirani brojač.
-   * Obrt je registriran 18.06.1991., što je javno provjerljivo (sudski/obrtni registar).
-   * Ostale brojke (broj testiranih injektora i sl.) nisu javno provjerljive pa nisu navedene.
+   * Obrt je registriran 18.06.1991. (sudski/obrtni registar). Podatak o broju
+   * zaposlenih osoba s invaliditetom preuzet je iz javno objavljenog intervjua
+   * sa Slavkom Miškulinom (in-portal.hr, IN mreža). Ostale brojke (broj
+   * testiranih injektora i sl.) nisu javno provjerljive pa nisu navedene.
    */
-  stats: [{ value: 35, prefix: '+', label: 'godina iskustva (od 1991.)' }] satisfies Stat[],
+  stats: [
+    { value: 35, prefix: '+', label: 'godina iskustva (od 1991.)' },
+    { value: 4, label: 'zaposlenika s invaliditetom u timu' },
+  ] satisfies Stat[],
 
   /** PLACEHOLDER – jamstvo (prikazuje se u USP-u i FAQ-u; prazno = općeniti tekst) */
   warrantyText: '',
