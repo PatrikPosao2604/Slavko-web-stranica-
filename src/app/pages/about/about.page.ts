@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { IMAGES, srcsetFor } from '../../core/config/images.config';
 import { SITE } from '../../core/config/site.config';
+import { CERTIFICATES, Certificate } from '../../core/data/content.data';
 import { SeoService } from '../../core/services/seo.service';
 import { CtaComponent } from '../../components/cta/cta.component';
 import { UspComponent } from '../../components/usp/usp.component';
@@ -8,6 +10,7 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
 import { IconName } from '../../shared/components/icon/icons';
 import { PageHeroComponent } from '../../shared/components/page-hero/page-hero.component';
 import { ResponsiveImageComponent } from '../../shared/components/responsive-image/responsive-image.component';
+import { SectionHeadingComponent } from '../../shared/components/section-heading/section-heading.component';
 import { RevealDirective } from '../../shared/directives/reveal.directive';
 
 @Component({
@@ -17,6 +20,7 @@ import { RevealDirective } from '../../shared/directives/reveal.directive';
     IconComponent,
     PageHeroComponent,
     ResponsiveImageComponent,
+    SectionHeadingComponent,
     RevealDirective,
     UspComponent,
     CtaComponent,
@@ -27,6 +31,15 @@ import { RevealDirective } from '../../shared/directives/reveal.directive';
 })
 export class AboutPage {
   protected readonly site = SITE;
+  protected readonly certificates = CERTIFICATES;
+
+  protected certImage(c: Certificate) {
+    return IMAGES[c.image];
+  }
+
+  protected certSrcset(c: Certificate): string | null {
+    return srcsetFor(this.certImage(c));
+  }
 
   protected readonly principles: { icon: IconName; title: string; text: string }[] = [
     {

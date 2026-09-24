@@ -53,6 +53,47 @@
   </div>
 </section>
 
+<section class="section certificates" aria-labelledby="certifikati-title">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Priznanja"
+      title="Certifikati i nagrade"
+      headingId="certifikati-title"
+      lead="Potvrde stručne izobrazbe, Bosch partnerstva i javno priznanje lokalne zajednice za naš rad."
+    />
+
+    <ul class="certificates__grid">
+      @for (c of certificates; track c.title; let i = $index) {
+        <li class="cert" appReveal [appRevealDelay]="i * 70">
+          <a
+            class="cert__media"
+            [href]="certImage(c).src"
+            target="_blank"
+            rel="noopener"
+            [attr.aria-label]="'Otvori certifikat u punoj veličini: ' + c.title"
+          >
+            <img
+              [src]="certImage(c).src"
+              [attr.srcset]="certSrcset(c)"
+              sizes="(min-width: 1024px) 30vw, 90vw"
+              [alt]="c.title"
+              [width]="certImage(c).width"
+              [height]="certImage(c).height"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <div class="cert__body">
+            <h3>{{ c.title }}</h3>
+            <p class="cert__meta">{{ c.issuer }} · {{ c.date }}</p>
+            <p class="cert__desc">{{ c.description }}</p>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
 <app-usp />
 <app-cta />
 <div class="about__spacer"></div>
