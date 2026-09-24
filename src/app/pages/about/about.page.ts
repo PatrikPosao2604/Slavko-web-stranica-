@@ -62,6 +62,11 @@ export class AboutPage {
       title: 'Odgovornost za rad',
       text: 'Stojimo iza svakog zahvata – na obavljeni rad i ugrađene dijelove dajemo jamstvo.',
     },
+    {
+      icon: 'heart',
+      title: 'Društveno odgovorno poslovanje',
+      text: 'Dio našeg tima čine osobe s invaliditetom. Za taj pristup poslovanju obrt je 2020. godine dobio Godišnju nagradu Grada Siska.',
+    },
   ];
 
   constructor() {
