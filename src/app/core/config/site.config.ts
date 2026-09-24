@@ -39,80 +39,75 @@ export interface Stat {
 }
 
 export const SITE = {
-  /** PLACEHOLDER – puni naziv servisa (koristi se u SEO-u i footeru) */
-  name: 'Naziv Servisa',
-  /** PLACEHOLDER – kratki naziv za logo */
-  shortName: 'NAZIV SERVISA',
+  /** puni naziv servisa (koristi se u SEO-u i footeru) */
+  name: 'ZIBEL autodijelovi',
+  /** kratki naziv za logo */
+  shortName: 'ZIBEL',
   /** Podnaslov uz logo */
   logoTagline: 'Diesel injection lab',
-  /** PLACEHOLDER – pravni naziv tvrtke (npr. "Naziv d.o.o.") za footer i pravne stranice */
-  legalName: 'Naziv tvrtke d.o.o.',
-  /** PLACEHOLDER – OIB (ostavite prazno ako ga ne želite prikazati) */
-  oib: '',
+  /** pravni naziv tvrtke za footer i pravne stranice */
+  legalName: 'ZIBEL, obrt za trgovinu, vl. Slavko Miškulin',
+  /** OIB */
+  oib: '56069968965',
 
-  /** PLACEHOLDER – produkcijska domena BEZ završne kose crte */
+  /** TODO – produkcijska domena BEZ završne kose crte, popuniti nakon objave stranice */
   url: 'https://www.example.com',
 
   /** Kratki opis za footer */
   description:
-    'Specijalizirani servis za dijagnostiku, testiranje i reparaciju dizni, Common Rail injektora i visokotlačnih pumpi.',
+    'ZIBEL – obrt za trgovinu autodijelovima i opremom, vl. Slavko Miškulin. Prodaja auto dijelova te dijagnostika, testiranje i reparacija dizni i Common Rail injektora u Sisku.',
 
   contact: {
-    /** PLACEHOLDER – telefon za prikaz */
-    phoneDisplay: '+385 00 000 0000',
-    /** PLACEHOLDER – telefon u E.164 formatu (za tel: linkove i JSON-LD) */
-    phoneHref: '+385000000000',
-    /** PLACEHOLDER – e-mail */
+    /** telefon za prikaz */
+    phoneDisplay: '+385 44 531 789',
+    /** telefon u E.164 formatu (za tel: linkove i JSON-LD) */
+    phoneHref: '+38544531789',
+    /** TODO – e-mail adresa nije javno dostupna u dostupnim izvorima, potrebno dopuniti */
     email: 'info@example.com',
-    /** PLACEHOLDER – WhatsApp/Viber broj bez razmaka (prazno = ne prikazuj) */
+    /** WhatsApp/Viber broj bez razmaka (prazno = ne prikazuj) */
     whatsapp: '',
   },
 
   address: {
-    /** PLACEHOLDER */
-    street: 'Ulica i kućni broj',
-    /** PLACEHOLDER */
-    postalCode: '10000',
-    /** PLACEHOLDER */
-    city: 'Grad',
+    street: 'Ulica hrvatskih domobrana 80',
+    postalCode: '44000',
+    city: 'Sisak',
     region: 'Hrvatska',
     country: 'HR',
-    /** PLACEHOLDER – koordinate za strukturirane podatke (null = izostavi) */
+    /** koordinate za strukturirane podatke (null = izostavi) */
     geo: null as { lat: number; lng: number } | null,
     /** Upit za Google Maps (adresa ili naziv tvrtke). */
-    mapsQuery: 'Zagreb, Hrvatska',
+    mapsQuery: 'ZIBEL, Ulica hrvatskih domobrana 80, 44000 Sisak',
   },
 
-  /** PLACEHOLDER – radno vrijeme */
+  /** radno vrijeme */
   openingHours: [
     {
       label: 'Ponedjeljak – Petak',
-      hours: '08:00 – 16:00',
+      hours: '08:00 – 17:00',
       schemaDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
       opens: '08:00',
-      closes: '16:00',
+      closes: '17:00',
     },
-    { label: 'Subota', hours: 'Po dogovoru', schemaDays: [] },
+    {
+      label: 'Subota',
+      hours: '08:00 – 12:00',
+      schemaDays: ['Saturday'],
+      opens: '08:00',
+      closes: '12:00',
+    },
     { label: 'Nedjelja', hours: 'Zatvoreno', schemaDays: [] },
   ] satisfies OpeningHours[],
 
-  /** PLACEHOLDER – društvene mreže (prazan niz = sekcija se ne prikazuje) */
-  social: [
-    { label: 'Facebook', url: 'https://www.facebook.com/', icon: 'facebook' },
-    { label: 'Instagram', url: 'https://www.instagram.com/', icon: 'instagram' },
-  ] satisfies SocialLink[],
+  /** TODO – društvene mreže: nije pronađena službena Facebook/Instagram stranica obrta, dopuniti kad bude poznato (prazan niz = sekcija se ne prikazuje) */
+  social: [] as SocialLink[],
 
   /**
-   * PLACEHOLDER – brojke za animirani brojač.
-   * OVO NISU STVARNI PODACI. Upišite samo provjerene vrijednosti
-   * ili postavite `stats: []` da se traka ne prikazuje.
+   * Brojke za animirani brojač.
+   * Obrt je registriran 18.06.1991., što je javno provjerljivo (sudski/obrtni registar).
+   * Ostale brojke (broj testiranih injektora i sl.) nisu javno provjerljive pa nisu navedene.
    */
-  stats: [
-    { value: 10, prefix: '+', label: 'godina iskustva' },
-    { value: 1000, suffix: '+', label: 'testiranih injektora' },
-    { value: 4, suffix: '+', label: 'proizvođača sustava' },
-    { value: 100, suffix: '%', label: 'injektora testirano prije predaje' },
-  ] satisfies Stat[],
+  stats: [{ value: 35, prefix: '+', label: 'godina iskustva (od 1991.)' }] satisfies Stat[],
 
   /** PLACEHOLDER – jamstvo (prikazuje se u USP-u i FAQ-u; prazno = općeniti tekst) */
   warrantyText: '',
@@ -132,9 +127,9 @@ export const SITE = {
   },
 
   seo: {
-    defaultTitle: 'Servis dizni i injektora | Reparacija Common Rail sustava',
+    defaultTitle: 'ZIBEL autodijelovi Sisak | Servis dizni i injektora',
     defaultDescription:
-      'Profesionalna dijagnostika, testiranje i reparacija dizni i Common Rail injektora. Precizna kontrola, kalibracija i stručan servis diesel sustava.',
+      'ZIBEL, obrt za trgovinu autodijelovima, vl. Slavko Miškulin – Sisak. Prodaja auto dijelova te profesionalna dijagnostika, testiranje i reparacija dizni i Common Rail injektora.',
     ogImage: '/assets/images/og-image.jpg',
     locale: 'hr_HR',
     themeColor: '#0b0c0e',
