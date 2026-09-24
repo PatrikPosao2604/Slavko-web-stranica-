@@ -57,6 +57,11 @@ export const USPS: Usp[] = [
     title: 'Jamstvo na rad',
     text: 'Na obavljene radove dobivate jamstvo i pisani izvještaj s izmjerenim vrijednostima.',
   },
+  {
+    icon: 'fuel',
+    title: 'Manja potrošnja goriva',
+    text: 'Injektor je jedini dio na vozilu koji nakon stručne reparacije mjerljivo smanjuje potrošnju – i do 2 litre na 100 km. Cijena zahvata na prvi pogled djeluje visoko, no kroz prijeđene kilometre se vraća.',
+  },
 ];
 
 /* --------------------------------------------------------------------------
@@ -79,13 +84,13 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     number: '02',
     title: 'Demontaža i pregled',
-    text: 'Dizne se pažljivo skidaju, označavaju po cilindrima i vizualno pregledavaju – kao i brtve, cijevi i sjedišta.',
+    text: 'Dizne se pažljivo skidaju i označavaju po cilindrima. Prvi korak je čišćenje vanjskog kućišta, nakon čega slijedi elektronička provjera u 6 faza – zavojnica, otpor, izolacija i signali prema upravljačkoj jedinici prolaze kroz sve faze prije nego se dizna rastavi.',
     icon: 'search',
   },
   {
     number: '03',
     title: 'Testiranje',
-    text: 'Na testnom stolu mjerimo ubrizgavanje, povrat i nepropusnost. Rezultati pokazuju koja dizna treba zahvat.',
+    text: 'Na Hartridge Sabre i CRI Expert testnim stolovima očitava se stvarno stanje dizne – tehničar mora razumjeti i iščitati svaku fazu simulacije rada injektora. Samo vrhunska, skupa oprema dodatno mjeri NOP i MDP te prikazuje grafove vremena i količine ubrizgavanja, gdje se vide odstupanja koja jeftinija oprema ne otkriva.',
     icon: 'gauge',
   },
   {
@@ -232,6 +237,12 @@ export const EQUIPMENT: EquipmentItem[] = [
     title: 'Mjerenje protoka',
     text: 'Usporedba ubrizgane količine i povrata između injektora istog motora.',
     image: 'flowMeasurement',
+  },
+  {
+    icon: 'diamond',
+    title: 'Poliranje na dijamantnim pločama',
+    text: 'Sjedišta i dosjedne površine dizne fino se poliraju na dijamantnim pločama do potpune ravnosti – uvjet za nepropusnost pod visokim tlakom.',
+    image: 'nozzleMacro',
   },
   {
     icon: 'cpu',
@@ -444,6 +455,10 @@ export const FAQ: FaqItem[] = [
   {
     q: 'Mogu li poslati samo injektore?',
     a: 'Da. Injektore možete donijeti ili poslati dostavnom službom. Dobro ih zapakirajte, zaštitite priključke i uz pošiljku priložite podatke o vozilu i opis problema. Nakon testiranja javljamo vam rezultate i prijedlog daljnjih koraka.',
+  },
+  {
+    q: 'Isplati li se profesionalna reparacija injektora?',
+    a: 'Da. Injektor je jedini element na vozilu koji nakon stručne reparacije mjerljivo smanjuje potrošnju goriva – i do 2 litre na 100 km, ovisno o stupnju oštećenja diznih otvora. Na prvi pogled cijena zahvata djeluje visoko, no kroz prijeđene kilometre uloženi novac se vraća kroz manju potrošnju i miran rad motora.',
   },
   {
     q: 'Radite li dizne za osobna i gospodarska vozila?',

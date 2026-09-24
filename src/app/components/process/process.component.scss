@@ -132,8 +132,8 @@
 }
 
 .step--measure .step__body {
-  border-color: rgba(255, 90, 31, 0.3);
-  background: linear-gradient(180deg, rgba(255, 90, 31, 0.07), rgba(20, 22, 26, 0.4));
+  border-color: rgba(56, 189, 248, 0.3);
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.07), rgba(20, 22, 26, 0.4));
 }
 
 .step__icon {
@@ -159,8 +159,8 @@
   font-size: 0.64rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--c-accent);
-  border: 1px solid rgba(255, 90, 31, 0.35);
+  color: var(--c-measure);
+  border: 1px solid rgba(56, 189, 248, 0.35);
   border-radius: 999px;
 }
 
