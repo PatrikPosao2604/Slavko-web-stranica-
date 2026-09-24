@@ -363,6 +363,44 @@ export const GALLERY: GalleryItem[] = [
 ];
 
 /* --------------------------------------------------------------------------
+ *  Certifikati i priznanja
+ * ------------------------------------------------------------------------ */
+export interface Certificate {
+  image: ImageKey;
+  title: string;
+  issuer: string;
+  date: string;
+  description: string;
+}
+
+export const CERTIFICATES: Certificate[] = [
+  {
+    image: 'certificateSiskAward',
+    title: 'Godišnja nagrada Grada Siska',
+    issuer: 'Gradsko vijeće Grada Siska',
+    date: '2. lipnja 2020.',
+    description:
+      'Javno priznanje Grada Siska dodijeljeno Slavku Miškulinu za uspješno poduzetništvo prilagođeno osobama s invaliditetom. Nagrada se dodjeljuje pojedincima i tvrtkama koje svojim radom pridonose ugledu i razvoju grada.',
+  },
+  {
+    image: 'certificateBoschComfortElectronics',
+    title: 'Bosch Service Training – Komforna elektronika 1',
+    issuer: 'Robert Bosch d.o.o., Auto oprema',
+    date: '27.–28. rujna 2021.',
+    description:
+      'Potvrda o sudjelovanju i stečenim teoretskim i praktičnim znanjima na Boschevom stručnom seminaru o komfornoj elektronici vozila. Dio je Boschevog programa trajne izobrazbe servisera koji prati suvremeno stanje automobilske tehnologije.',
+  },
+  {
+    image: 'certificateBoschInjectionPartner',
+    title: 'Bosch modul partner – Sustavi i ubrizgavanje',
+    issuer: 'Robert Bosch d.o.o., Auto oprema',
+    date: 'za 2024. godinu',
+    description:
+      'Certifikat kojim Bosch potvrđuje status ovlaštenog modul partnera za sustave i ubrizgavanje goriva. Dodjeljuje se radionicama s opremom, alatima i osposobljenošću tima za dijagnostiku i popravak Bosch sustava ubrizgavanja prema tvorničkim standardima.',
+  },
+];
+
+/* --------------------------------------------------------------------------
  *  FAQ
  * ------------------------------------------------------------------------ */
 export interface FaqItem {

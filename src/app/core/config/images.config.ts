@@ -184,6 +184,26 @@ export const IMAGES = {
     1600,
     1000,
   ),
+
+  // --- Certifikati i priznanja ------------------------------------------------
+  certificateSiskAward: img(
+    'certificate-sisak-award.webp',
+    'Godišnja nagrada Grada Siska dodijeljena Slavku Miškulinu za uspješno poduzetništvo prilagođeno osobama s invaliditetom',
+    1600,
+    2558,
+  ),
+  certificateBoschComfortElectronics: img(
+    'certificate-bosch-comfort-electronics.webp',
+    'Bosch Service Training certifikat za seminar Komforna elektronika 1',
+    1600,
+    3379,
+  ),
+  certificateBoschInjectionPartner: img(
+    'certificate-bosch-injection-partner.webp',
+    'Bosch certifikat modul partnera za 2024. godinu – Sustavi i ubrizgavanje',
+    1600,
+    2863,
+  ),
 } satisfies Record<string, ImageAsset>;
 
 export type ImageKey = keyof typeof IMAGES;
