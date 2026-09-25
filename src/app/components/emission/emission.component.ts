@@ -130,7 +130,7 @@ const pct = (v: number) => ((v - SCALE_MIN) / (SCALE_MAX - SCALE_MIN)) * 100;
             <p>
               Testni stol nudi i ova dva mjerenja – ali se plaćaju zasebno, po injektoru. Injektor
               lako prođe sve ostale točke, a onda padne na NOP ili MDP i sve kreće ispočetka. Mi ih
-              ne preskačemo.
+              ne preskačemo – uvijek kad ih injektor i test-plan podržavaju.
             </p>
           </div>
           <ul class="nm__grid">

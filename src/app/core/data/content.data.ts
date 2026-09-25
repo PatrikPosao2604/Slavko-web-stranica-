@@ -96,7 +96,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     number: '03',
     title: 'Testiranje',
-    text: 'Na Hartridge Sabre i CRI Expert testnim stolovima očitava se stvarno stanje dizne – tehničar mora razumjeti i iščitati svaku fazu simulacije rada injektora. Samo vrhunska, skupa oprema dodatno mjeri NOP i MDP te prikazuje grafove vremena i količine ubrizgavanja, gdje se vide odstupanja koja jeftinija oprema ne otkriva. Posebnu pažnju dajemo točki emisije – punom opterećenju kada stisnete gas do poda.',
+    text: 'Na Bosch DCI 200 i Hartridge Sabre CRi Expert testnim stolovima očitava se stvarno stanje dizne – tehničar mora razumjeti i iščitati svaku fazu simulacije rada injektora. Samo vrhunska, skupa oprema dodatno mjeri NOP i MDP te prikazuje grafove vremena i količine ubrizgavanja, gdje se vide odstupanja koja jeftinija oprema ne otkriva. Posebnu pažnju dajemo točki emisije – punom opterećenju kada stisnete gas do poda.',
     icon: 'gauge',
   },
   {
@@ -337,6 +337,91 @@ export const LAB_STANDARD: string[] = [
 ];
 
 /* --------------------------------------------------------------------------
+ *  Testni stolovi: Bosch DCI 200 + Hartridge Sabre CRi Expert
+ * ------------------------------------------------------------------------ */
+export interface BenchMachine {
+  maker: string;
+  name: string;
+  role: string;
+  stat: string;
+  statLabel: string;
+  image: ImageKey;
+  text: string[];
+  checks: string[];
+}
+
+export const BENCH_MACHINES: BenchMachine[] = [
+  {
+    maker: 'Bosch',
+    name: 'DCI 200',
+    role: 'Visokotlačna preciznost',
+    stat: '2700',
+    statLabel: 'bara maksimalni ispitni tlak',
+    image: 'injectorCodingStation',
+    text: [
+      'Nije obični stol koji samo prikazuje količinu goriva. To je originalna Boschova ispitna stanica za common-rail injektore, projektirana za ponovljiv rad pod tlakovima do 2700 bara.',
+      'CP4.1 pumpa, zakretni rail i regulacija tlaka stvaraju stabilne uvjete koji odgovaraju stvarnom radu dizelskog sustava. Rezultat se ne procjenjuje „na osjećaj“ – uspoređuje se s propisanim granicama za konkretan injektor.',
+    ],
+    checks: ['Količine ubrizgavanja', 'Povrat goriva', 'Nepropusnost', 'Rad pod visokim tlakom'],
+  },
+  {
+    maker: 'Hartridge',
+    name: 'Sabre CRi Expert',
+    role: 'Dubinska analiza',
+    stat: '5',
+    statLabel: 'točaka korekcije po injektoru',
+    image: 'workshopTestStations',
+    text: [
+      'Test se vodi prema točnom kataloškom broju injektora. Operater ne bira nasumične vrijednosti – u softveru se učitava odgovarajući test-plan, a sustav prati svaku zadanu granicu.',
+    ],
+    checks: [
+      'Električna provjera injektora',
+      'Ispiranje i priprema za mjerenje',
+      'Povratni tok i nepropusnost u više stanja',
+      'Statička i dinamička provjera rada',
+      'Pet zasebnih točaka korekcije',
+      'Tlak, vrijeme odziva, količina i širina impulsa',
+      'Krivulje ubrizgavanja na ~400, 800 i 1600 bara',
+      'Grading code – korekcijski kod za ECU',
+      'Status prolaz/pad uz svaku mjernu stavku',
+    ],
+  },
+];
+
+export interface ReportPage {
+  pages: string;
+  title: string;
+  text: string;
+  items: string[];
+}
+
+export const REPORT_PAGES: ReportPage[] = [
+  {
+    pages: 'Str. 1',
+    title: 'Sažetak testa',
+    text: 'Identifikacija injektora, QR kod izvještaja i završna oznaka prolaza.',
+    items: ['Električni dio', 'Ispiranje', 'Povratni tok u više stanja', 'Dinamičko ponašanje'],
+  },
+  {
+    pages: 'Str. 2',
+    title: 'Pet točaka korekcije',
+    text: 'Adjustment 1–5 – stvarno ponašanje injektora u više režima rada, a ne samo „dobar/loš“.',
+    items: [
+      'Tlak',
+      'Vrijeme reakcije',
+      'Ubrizgana i korekcijska količina',
+      'Razlika impulsa i broj mjernih točaka',
+    ],
+  },
+  {
+    pages: 'Str. 3–4',
+    title: 'Krivulje ubrizgavanja',
+    text: 'Odnos trajanja električnog impulsa i isporučene količine goriva pri više tlakova. Iz njih sustav stvara korekcijski kod za upravljačku jedinicu.',
+    items: ['~1600 bara', '~800 bara', '~400 bara', 'Grading code za ECU'],
+  },
+];
+
+/* --------------------------------------------------------------------------
  *  Simptomi
  * ------------------------------------------------------------------------ */
 export type SymptomZone = 'engine' | 'exhaust' | 'cabin' | 'fuel';
@@ -433,7 +518,7 @@ export const EQUIPMENT: EquipmentItem[] = [
   {
     icon: 'gauge',
     title: 'Testni stolovi',
-    text: 'Simulacija rada injektora pri različitim tlakovima i duljinama impulsa.',
+    text: 'Bosch DCI 200 (do 2700 bara) i Hartridge Sabre CRi Expert – simulacija rada injektora pri različitim tlakovima i duljinama impulsa, s mjernim protokolom i korekcijskim kodom.',
     image: 'injectorTesting',
   },
   {
@@ -583,7 +668,7 @@ export const GALLERY: GalleryItem[] = [
   },
   {
     image: 'injectorTestReports',
-    caption: 'Injektori uz zapisnike ispitivanja',
+    caption: 'Injektori uz mjerne protokole',
     category: 'testiranje',
     tall: true,
   },
@@ -601,7 +686,7 @@ export const GALLERY: GalleryItem[] = [
   },
   {
     image: 'injectorCodingStation',
-    caption: 'Bosch stanica za kodiranje injektora',
+    caption: 'Bosch DCI 200 ispitna stanica',
     category: 'radionica',
     wide: true,
   },
@@ -687,6 +772,10 @@ export const FAQ: FaqItem[] = [
   {
     q: 'Kojom opremom provjeravate električni dio injektora?',
     a: 'Koristimo Open System Mega Tester V4 za piezo injektore i Valve Tester V1 s aktualnim V2 softverom za solenoidne injektore, uz DITEX TURAN VBI za mehanički dio. Mjerimo kapacitet i izolaciju piezo elementa, otpor, induktivitet, struje aktiviranja i otpuštanja, hodove i zazore. Tako otkrivamo kvarove koji se ne vide običnim mjerenjem otpora ili samo testom količine goriva.',
+  },
+  {
+    q: 'Dobivam li izvještaj o testiranju?',
+    a: 'Da. Injektor testiran na Hartridge Sabre CRi Expert stolu dobiva mjerni protokol: identifikaciju i QR kod, rezultate električne provjere, povrata i dinamičkog ponašanja s granicama minimum–maksimum i statusom svake stavke, pet točaka korekcije, krivulje ubrizgavanja pri oko 400, 800 i 1600 bara te korekcijski kod za upravljačku jedinicu motora. Ne vraćamo injektor zato što „izgleda dobro“, nego s dokazom kako radi.',
   },
   {
     q: 'Treba li kodirati diznu nakon reparacije?',

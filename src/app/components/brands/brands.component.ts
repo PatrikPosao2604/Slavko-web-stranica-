@@ -15,7 +15,7 @@ import { RevealDirective } from '../../shared/directives/reveal.directive';
       <div class="container">
         <app-section-heading
           eyebrow="Podržani sustavi"
-          index="09"
+          index="10"
           title="Kompatibilni sustavi ubrizgavanja"
           headingId="brands-title"
           align="center"

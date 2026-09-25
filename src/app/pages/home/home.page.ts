@@ -9,6 +9,7 @@ import { ServicesComponent } from '../../components/services/services.component'
 import { ProcessComponent } from '../../components/process/process.component';
 import { EmissionComponent } from '../../components/emission/emission.component';
 import { LabComponent } from '../../components/lab/lab.component';
+import { BenchComponent } from '../../components/bench/bench.component';
 import { SymptomsComponent } from '../../components/symptoms/symptoms.component';
 import { EquipmentComponent } from '../../components/equipment/equipment.component';
 import { BeforeAfterComponent } from '../../components/before-after/before-after.component';
@@ -27,6 +28,7 @@ import { ContactComponent } from '../../components/contact/contact.component';
     ProcessComponent,
     EmissionComponent,
     LabComponent,
+    BenchComponent,
     SymptomsComponent,
     EquipmentComponent,
     BeforeAfterComponent,
@@ -43,6 +45,7 @@ import { ContactComponent } from '../../components/contact/contact.component';
     <app-process />
     <app-emission />
     <app-lab />
+    <app-bench />
     <app-symptoms />
     <app-equipment />
     <app-before-after />
