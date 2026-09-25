@@ -112,7 +112,7 @@ export const SITE = {
   stats: [
     { value: 35, prefix: '+', label: 'godina iskustva (od 1991.)' },
     { value: 4, label: 'zaposlenika s invaliditetom u timu' },
-  ] satisfies Stat[],
+  ] as Stat[],
 
   /** PLACEHOLDER – jamstvo (prikazuje se u USP-u i FAQ-u; prazno = općeniti tekst) */
   warrantyText: '',

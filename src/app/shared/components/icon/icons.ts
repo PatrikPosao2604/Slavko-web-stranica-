@@ -78,6 +78,8 @@ export const ICONS = {
     '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>',
   diamond:
     '<path d="M2.7 10.3L8 2h8l5.3 8.3a1 1 0 0 1-.1 1.2l-9.4 10.1a1.1 1.1 0 0 1-1.6 0L2.8 11.5a1 1 0 0 1-.1-1.2z"/><path d="M8 2L6 10l6 11.6M16 2l2 8-6 11.6M2.7 10.3h18.6"/>',
+  target:
+    '<circle cx="12" cy="10" r="7"/><path d="M12 10l3.5-3.5M12 3v1.5M5 10h1.5M17.5 10H19M12 17v5M10 22h4"/>',
 } as const;
 
 export type IconName = keyof typeof ICONS;

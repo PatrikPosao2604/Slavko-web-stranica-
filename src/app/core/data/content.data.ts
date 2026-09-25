@@ -16,6 +16,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Početna', path: '/', fragment: 'pocetak' },
   { label: 'Usluge', path: '/', fragment: 'usluge' },
   { label: 'Kako radimo', path: '/', fragment: 'kako-radimo' },
+  { label: 'Emisija', path: '/', fragment: 'emisija' },
   { label: 'O nama', path: '/o-nama' },
   { label: 'Galerija', path: '/', fragment: 'galerija' },
   { label: 'FAQ', path: '/', fragment: 'faq' },
@@ -51,6 +52,11 @@ export const USPS: Usp[] = [
     icon: 'injector',
     title: 'Common Rail stručnost',
     text: 'Elektromagnetski i piezo injektori, visokotlačne pumpe i kodiranje korekcija.',
+  },
+  {
+    icon: 'zap',
+    title: 'Snaga kad zatreba',
+    text: 'Emisiju podešavamo u gornji dio tolerancije. Kad stisnete gas do poda, igla se digne i motor povuče – baš kad vam to spašava situaciju.',
   },
   {
     icon: 'shield',
@@ -90,7 +96,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     number: '03',
     title: 'Testiranje',
-    text: 'Na Hartridge Sabre i CRI Expert testnim stolovima očitava se stvarno stanje dizne – tehničar mora razumjeti i iščitati svaku fazu simulacije rada injektora. Samo vrhunska, skupa oprema dodatno mjeri NOP i MDP te prikazuje grafove vremena i količine ubrizgavanja, gdje se vide odstupanja koja jeftinija oprema ne otkriva.',
+    text: 'Na Hartridge Sabre i CRI Expert testnim stolovima očitava se stvarno stanje dizne – tehničar mora razumjeti i iščitati svaku fazu simulacije rada injektora. Samo vrhunska, skupa oprema dodatno mjeri NOP i MDP te prikazuje grafove vremena i količine ubrizgavanja, gdje se vide odstupanja koja jeftinija oprema ne otkriva. Posebnu pažnju dajemo točki emisije – punom opterećenju kada stisnete gas do poda.',
     icon: 'gauge',
   },
   {
@@ -104,6 +110,105 @@ export const PROCESS_STEPS: ProcessStep[] = [
     title: 'Završna kontrola',
     text: 'Ponovno testiranje nakon reparacije, novi korekcijski kod i provjera rada na vozilu nakon ugradnje.',
     icon: 'check-circle',
+  },
+];
+
+/* --------------------------------------------------------------------------
+ *  Emisija, NOP i MDP
+ * ------------------------------------------------------------------------ */
+export interface TestPoint {
+  code: string;
+  title: string;
+  motto: string;
+  text: string;
+  icon: IconName;
+  /** Istaknuta točka (emisija) */
+  highlight?: boolean;
+}
+
+export const TEST_POINTS: TestPoint[] = [
+  {
+    code: 'PI',
+    title: 'Pilot',
+    motto: 'Pali bez ključa',
+    text: 'Predubrizgavanje – mala količina goriva koja omogućuje mekano i brzo paljenje.',
+    icon: 'key',
+  },
+  {
+    code: 'LL',
+    title: 'Prazni hod (ler)',
+    motto: 'Na leru šapuće',
+    text: 'Miran, ujednačen rad motora bez vibracija. Ovdje većina servisa staje – dijagnostika pokazuje da je sve „top“.',
+    icon: 'activity',
+  },
+  {
+    code: 'EM',
+    title: 'Emisija',
+    motto: 'Gas do poda – spašava',
+    text: 'Puno opterećenje, od 800 bara naviše. Točka koja odlučuje ima li motor snage kad vam zatreba – i koju dijagnostika na vozilu ne može očitati.',
+    icon: 'zap',
+    highlight: true,
+  },
+];
+
+export interface EmissionCompare {
+  label: string;
+  value: number;
+  verdict: string;
+  best?: boolean;
+}
+
+/** Primjer tolerancije emisije za jedan tip injektora (mm³/hod). */
+export const EMISSION_RANGE = { min: 20, max: 35 };
+
+export const EMISSION_COMPARE: EmissionCompare[] = [
+  {
+    label: 'Prosječna reparacija',
+    value: 25,
+    verdict: 'Prođe test – ali kad stisnete gas do poda, igla se ne digne više od toga.',
+  },
+  {
+    label: 'Naša reparacija',
+    value: 30,
+    verdict:
+      'Igla se digne više, u cilindar ulazi više goriva – auto povuče kao da se upalio dodatni turbo.',
+    best: true,
+  },
+];
+
+export interface ScenarioStep {
+  time: string;
+  text: string;
+}
+
+export const EMISSION_SCENARIO: ScenarioStep[] = [
+  { time: '0,0 s', text: 'Vozite 100 km/h i krenete pretjecati.' },
+  { time: '1,2 s', text: 'Vozilo iz suprotnog smjera dolazi brže nego što ste mislili.' },
+  {
+    time: '1,5 s',
+    text: 'Instinkt: gas do poda. Igla se diže, gorivo – „hrana“ za eksploziju – ulazi u cilindar i motor vas izvuče.',
+  },
+];
+
+export interface NopMdpItem {
+  code: string;
+  name: string;
+  title: string;
+  text: string;
+}
+
+export const NOP_MDP: NopMdpItem[] = [
+  {
+    code: 'NOP',
+    name: 'Nozzle Opening Pressure',
+    title: 'Tlak otvaranja igle',
+    text: 'Okrenete ključ, signal ide iz računala na senzore, pumpa diže tlak – i kad u sustavu dosegne zadanu vrijednost (npr. 150 bara), igla se mora otvoriti. Ni prije, ni kasnije.',
+  },
+  {
+    code: 'MDP',
+    name: 'Minimum Drive Pulse',
+    title: 'Najkraći upravljački impuls',
+    text: 'Najkraći električni impuls na koji injektor još ubrizga gorivo. Od njega ovise precizna pred-ubrizgavanja, tiho paljenje i miran prazni hod.',
   },
 ];
 
@@ -191,8 +296,7 @@ export const SYMPTOMS: Symptom[] = [
 
 /* --------------------------------------------------------------------------
  *  Oprema / tehnologija
- *  Napomena: proizvođači opreme namjerno nisu navedeni. Dodajte ih samo ako
- *  su poznati i točni.
+ *  Napomena: proizvođače opreme navodite samo ako su poznati i točni.
  * ------------------------------------------------------------------------ */
 export interface EquipmentItem {
   icon: IconName;
@@ -213,6 +317,12 @@ export const EQUIPMENT: EquipmentItem[] = [
     title: 'Mjerna oprema',
     text: 'Precizno mjerenje hoda, zazora i sila – vrijednosti koje odlučuju o ispravnom radu.',
     image: 'newParts',
+  },
+  {
+    icon: 'target',
+    title: 'Tesa komparatori',
+    text: 'Švicarski Tesa komparatori – svjetski broj 1 u preciznom mjerenju. U radionici ih imamo više od deset, jer par mikrona na hodu igle radi čuda.',
+    image: 'injectorBatchCaliper',
   },
   {
     icon: 'waves',
@@ -435,6 +545,14 @@ export const FAQ: FaqItem[] = [
   {
     q: 'Što je Common Rail?',
     a: 'Common Rail je sustav ubrizgavanja kod kojeg visokotlačna pumpa puni zajedničku cijev (rail) gorivom pod vrlo visokim tlakom, a elektronički upravljani injektori ubrizgavaju gorivo u cilindre. Omogućuje više ubrizgavanja po ciklusu, tiši rad i manju potrošnju.',
+  },
+  {
+    q: 'Što je emisija na testu injektora i zašto je važna?',
+    a: 'Emisija je točka testa pri punom opterećenju (od 800 bara naviše) – ono što injektor daje kad stisnete gas do poda. Većina servisa gleda samo pilot (paljenje) i prazni hod, pa auto pali bez ključa i šapuće na leru. No ako je emisija namještena na donju granicu tolerancije, u kritičnoj situaciji, npr. pri pretjecanju, motoru nedostaje snage. Mi emisiju podešavamo u gornji dio dopuštenog raspona, a to traži vrijeme i precizno slaganje svih radnih točaka.',
+  },
+  {
+    q: 'Što su NOP i MDP?',
+    a: 'NOP (Nozzle Opening Pressure) je tlak pri kojem se igla injektora otvara, a MDP (Minimum Drive Pulse) najkraći upravljački impuls na koji injektor još ubrizgava. To su dodatna mjerenja koja se na testnom stolu plaćaju po injektoru – za set od 4 injektora to je dodatnih 20 €. Injektor koji prođe sve ostale testove često padne upravo na NOP ili MDP, pa se podešavanje radi ispočetka. Mi ta mjerenja radimo, jer tek tada znamo da je injektor zaista ispravan.',
   },
   {
     q: 'Treba li kodirati diznu nakon reparacije?',
