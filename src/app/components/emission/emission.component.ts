@@ -3,6 +3,7 @@ import {
   EMISSION_COMPARE,
   EMISSION_RANGE,
   EMISSION_SCENARIO,
+  NOP_DEVIATIONS,
   NOP_MDP,
   TEST_POINTS,
 } from '../../core/data/content.data';
@@ -135,13 +136,36 @@ const pct = (v: number) => ((v - SCALE_MIN) / (SCALE_MAX - SCALE_MIN)) * 100;
           <ul class="nm__grid">
             @for (n of nopMdp; track n.code; let i = $index) {
               <li class="nm__card" appReveal [appRevealDelay]="i * 90">
-                <span class="nm__code mono">{{ n.code }}</span>
+                <div class="nm__top">
+                  <span class="nm__code mono">{{ n.code }}</span>
+                  <span class="nm__unit mono">{{ n.unit }}</span>
+                </div>
                 <span class="nm__name mono">{{ n.name }}</span>
                 <h4 class="nm__card-title">{{ n.title }}</h4>
                 <p>{{ n.text }}</p>
+                <p class="nm__example">{{ n.example }}</p>
               </li>
             }
           </ul>
+          <div class="nm__table" appReveal>
+            <table>
+              <caption class="mono">
+                Što znači odstupanje NOP-a
+              </caption>
+              <tbody>
+                @for (d of deviations; track d.result) {
+                  <tr>
+                    <th scope="row">{{ d.result }}</th>
+                    <td>{{ d.meaning }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+            <p>
+              NOP se uvijek uspoređuje s propisanom vrijednošću za točan model dizne – nikad s
+              „univerzalnim“ brojem – i mora biti ponovljiv kroz više uzastopnih otvaranja.
+            </p>
+          </div>
           <div class="nm__cost" appReveal>
             <div class="nm__cost-math mono">
               <span>4 injektora</span><span>×</span><span>(5 € NOP + 5 € MDP)</span><span>=</span
@@ -187,6 +211,7 @@ export class EmissionComponent {
   protected readonly compare = EMISSION_COMPARE;
   protected readonly scenario = EMISSION_SCENARIO;
   protected readonly nopMdp = NOP_MDP;
+  protected readonly deviations = NOP_DEVIATIONS;
   protected readonly range = EMISSION_RANGE;
   protected readonly zoneLeft = pct(EMISSION_RANGE.min);
   protected readonly zoneWidth = pct(EMISSION_RANGE.max) - pct(EMISSION_RANGE.min);

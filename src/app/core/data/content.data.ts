@@ -194,22 +194,146 @@ export interface NopMdpItem {
   code: string;
   name: string;
   title: string;
+  /** Mjerna jedinica */
+  unit: string;
   text: string;
+  example: string;
 }
 
 export const NOP_MDP: NopMdpItem[] = [
   {
     code: 'NOP',
     name: 'Nozzle Opening Pressure',
-    title: 'Tlak otvaranja igle',
-    text: 'Okrenete ključ, signal ide iz računala na senzore, pumpa diže tlak – i kad u sustavu dosegne zadanu vrijednost (npr. 150 bara), igla se mora otvoriti. Ni prije, ni kasnije.',
+    title: 'Tlak otvaranja dizne',
+    unit: 'bar',
+    text: 'Najniži hidraulički tlak pri kojem gorivo počinje prolaziti kroz diznu. Govori o mehaničkom stanju mlaznice – igli, sjedištu, opruzi i trenju pokretnih dijelova.',
+    example:
+      'Specifikacija 180 bar: dizna koja otvara na 155 bar ima prenizak NOP, na 205 bar previsok. U oba slučaja injektor radi drukčije nego što je projektiran.',
   },
   {
     code: 'MDP',
     name: 'Minimum Drive Pulse',
     title: 'Najkraći upravljački impuls',
-    text: 'Najkraći električni impuls na koji injektor još ubrizga gorivo. Od njega ovise precizna pred-ubrizgavanja, tiho paljenje i miran prazni hod.',
+    unit: 'µs',
+    text: 'Najkraći električni impuls na koji injektor počinje pouzdano ubrizgavati. Od njega ovise precizna predubrizgavanja, tiho paljenje i miran prazni hod.',
+    example:
+      'Dobar MDP ne potvrđuje dobar NOP – i obrnuto. Tek kombinacija električne i hidrauličke kontrole daje pouzdanu ocjenu injektora.',
   },
+];
+
+export interface NopDeviation {
+  result: string;
+  meaning: string;
+}
+
+export const NOP_DEVIATIONS: NopDeviation[] = [
+  {
+    result: 'NOP prenizak',
+    meaning:
+      'Oslabljena opruga, istrošeno sjedište ili igla, pogrešan distancer, problem u sklopu dizne.',
+  },
+  {
+    result: 'NOP previsok',
+    meaning:
+      'Preveliko prednaprezanje opruge, pogrešna podloška, zapinjanje igle, nečistoća ili pogrešno sastavljen sklop.',
+  },
+  {
+    result: 'NOP nestabilan',
+    meaning:
+      'Zapinjanje, zrak u sustavu, nečistoća, loš dosjed igle i sjedišta ili slaba ponovljivost sklopa.',
+  },
+  {
+    result: 'Curi ispod NOP-a',
+    meaning:
+      'Igla i sjedište ne brtve – zato radimo i poseban test propuštanja neposredno ispod praga otvaranja.',
+  },
+];
+
+/* --------------------------------------------------------------------------
+ *  Referentna oprema za dijagnostiku
+ * ------------------------------------------------------------------------ */
+export interface LabPillar {
+  area: string;
+  device: string;
+  text: string;
+  icon: IconName;
+}
+
+export const LAB_PILLARS: LabPillar[] = [
+  {
+    area: 'Mehanički dio',
+    device: 'DITEX TURAN VBI',
+    text: 'Kontrola mehaničkog sklopa injektora – hodova, zazora i dosjeda pokretnih dijelova.',
+    icon: 'ruler',
+  },
+  {
+    area: 'Piezo injektori',
+    device: 'Mega Tester V4',
+    text: 'Stanje piezo elementa, izolacija pod visokim naponom, hod i zazor piezo sklopa.',
+    icon: 'zap',
+  },
+  {
+    area: 'Solenoidni injektori',
+    device: 'Valve Tester V1 · V2 softver',
+    text: 'Otpor, induktivitet, struje aktiviranja i otpuštanja te odziv upravljačkog ventila.',
+    icon: 'cpu',
+  },
+];
+
+export interface LabDevice {
+  maker: string;
+  name: string;
+  badge: string;
+  intro: string;
+  checks: string[];
+  note: string;
+}
+
+export const LAB_DEVICES: LabDevice[] = [
+  {
+    maker: 'Open System',
+    name: 'Mega Tester V4',
+    badge: 'Piezo CR injektori',
+    intro:
+      'Piezo injektori traže posebno preciznu kontrolu – i vrlo mala odstupanja piezo elementa, izolacije ili unutarnjeg zazora utječu na upravljački ventil, količinu ubrizgavanja i miran rad motora.',
+    checks: [
+      'Kapacitet piezo elementa',
+      'Otpor piezo elementa pod radnim uvjetima',
+      'Izolacija piezo sklopa pri povišenom ispitnom naponu',
+      'Električni integritet i odziv piezo aktuatora',
+      'Hod piezo elementa',
+      'Zazor između piezo aktuatora i potiskivača upravljačkog ventila',
+      'Reakcija injektora na generirani upravljački napon',
+    ],
+    note: 'Stanje piezo sklopa znamo prije završnog testa na stolu – problem koji se ne vidi samo mjerenjem otpora ili količine goriva.',
+  },
+  {
+    maker: 'Open System',
+    name: 'Valve Tester V1',
+    badge: 'Solenoid · V2 softver',
+    intro:
+      'Originalni V1 hardver, nadograđen i korišten s aktualnom V2 softverskom platformom – za elektromagnetske upravljačke ventile common-rail, UIS, HEUI i srodnih sustava.',
+    checks: [
+      'Aktivni otpor zavojnice',
+      'Induktivitet elektromagneta',
+      'Struja aktiviranja i struja otpuštanja',
+      'Brzina i stabilnost električnog odziva',
+      'Ponašanje armature i upravljačkog ventila',
+      'Procjena zračnog zazora elektromagneta',
+      'Zapinjanje, trošenje ili loše sklapanje unutarnjih dijelova',
+      'Bosch, Delphi, Denso, Cummins i drugi – uz odgovarajuće adaptere',
+    ],
+    note: 'Zavojnica može imati savršen otpor, a injektor ipak ne raditi ispravno. To se vidi tek u strujnom odzivu – i upravo to mjerimo.',
+  },
+];
+
+export const LAB_STANDARD: string[] = [
+  'Identifikacija i početna dijagnostika injektora',
+  'Rastavljanje, čišćenje i pregled svih kritičnih komponenti',
+  'Kontrola piezo elementa ili elektromagneta',
+  'Mjerenje električnog odziva, hoda i zazora',
+  'Precizno sklapanje prema tehničkoj proceduri',
+  'Završna provjera na testnom stolu',
 ];
 
 /* --------------------------------------------------------------------------
@@ -323,6 +447,12 @@ export const EQUIPMENT: EquipmentItem[] = [
     title: 'Tesa komparatori',
     text: 'Švicarski Tesa komparatori – svjetski broj 1 u preciznom mjerenju. U radionici ih imamo više od deset, jer par mikrona na hodu igle radi čuda.',
     image: 'injectorBatchCaliper',
+  },
+  {
+    icon: 'zap',
+    title: 'Mega Tester V4 i Valve Tester V1',
+    text: 'Open System oprema za električnu i funkcionalnu dijagnostiku piezo i solenoidnih injektora – kapacitet, izolacija, induktivitet, struje, hod i zazori.',
+    image: 'injectorTesterScreen',
   },
   {
     icon: 'waves',
@@ -441,7 +571,7 @@ export const GALLERY: GalleryItem[] = [
   },
   {
     image: 'injectorTesterScreen',
-    caption: 'Ispitivanje na Mega Tester uređaju',
+    caption: 'Ispitivanje na Open System Mega Tester V4',
     category: 'testiranje',
     tall: true,
   },
@@ -552,7 +682,11 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: 'Što su NOP i MDP?',
-    a: 'NOP (Nozzle Opening Pressure) je tlak pri kojem se igla injektora otvara, a MDP (Minimum Drive Pulse) najkraći upravljački impuls na koji injektor još ubrizgava. To su dodatna mjerenja koja se na testnom stolu plaćaju po injektoru – za set od 4 injektora to je dodatnih 20 €. Injektor koji prođe sve ostale testove često padne upravo na NOP ili MDP, pa se podešavanje radi ispočetka. Mi ta mjerenja radimo, jer tek tada znamo da je injektor zaista ispravan.',
+    a: 'NOP (Nozzle Opening Pressure) je tlak otvaranja dizne – najniži hidraulički tlak (u barima) pri kojem gorivo počinje prolaziti kroz diznu. MDP (Minimum Drive Pulse) je najkraći električni impuls (u mikrosekundama) na koji injektor počinje pouzdano ubrizgavati. Jedno ne zamjenjuje drugo: dobar MDP ne potvrđuje dobar NOP, i obrnuto. To su dodatna mjerenja koja se na testnom stolu plaćaju po injektoru – za set od 4 injektora to je dodatnih 20 €. Injektor koji prođe sve ostale testove često padne upravo na NOP ili MDP, pa se podešavanje radi ispočetka. Mi ta mjerenja radimo, jer tek tada znamo da je injektor zaista ispravan.',
+  },
+  {
+    q: 'Kojom opremom provjeravate električni dio injektora?',
+    a: 'Koristimo Open System Mega Tester V4 za piezo injektore i Valve Tester V1 s aktualnim V2 softverom za solenoidne injektore, uz DITEX TURAN VBI za mehanički dio. Mjerimo kapacitet i izolaciju piezo elementa, otpor, induktivitet, struje aktiviranja i otpuštanja, hodove i zazore. Tako otkrivamo kvarove koji se ne vide običnim mjerenjem otpora ili samo testom količine goriva.',
   },
   {
     q: 'Treba li kodirati diznu nakon reparacije?',

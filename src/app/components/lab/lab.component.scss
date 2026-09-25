@@ -1,0 +1,247 @@
+:host {
+  display: block;
+}
+
+.lab {
+  background: var(--c-bg);
+}
+
+/* --------------------------------------------------------------------------
+   Tri stupa: mehanika, piezo, solenoid
+   ------------------------------------------------------------------------ */
+.pillars {
+  list-style: none;
+  display: grid;
+  gap: 1px;
+  background: var(--c-line);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pillar {
+  position: relative;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--c-bg-soft);
+
+  p {
+    margin-top: 0.75rem;
+    font-size: 0.93rem;
+    color: var(--c-text-muted);
+  }
+}
+
+.pillar__num {
+  position: absolute;
+  top: clamp(1.5rem, 3vw, 2.25rem);
+  right: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: 0.8rem;
+  color: var(--c-text-dim);
+}
+
+.pillar__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 1.25rem;
+  border-radius: 0.9rem;
+  background: var(--c-accent);
+  color: #0b0c0e;
+}
+
+.pillar__area {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+}
+
+.pillar__device {
+  margin-top: 0.5rem;
+  font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
+}
+
+/* --------------------------------------------------------------------------
+   Uređaji
+   ------------------------------------------------------------------------ */
+.devices {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: clamp(3rem, 6vw, 5rem);
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 0.75fr 1.25fr;
+    align-items: start;
+  }
+}
+
+.devices__photo {
+  margin: 0;
+
+  @media (min-width: 1024px) {
+    position: sticky;
+    top: calc(var(--header-h-compact) + 1.5rem);
+  }
+
+  figcaption {
+    margin-top: 0.9rem;
+    font-size: 0.82rem;
+    color: var(--c-text-dim);
+  }
+}
+
+.devices__img {
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--c-line-strong);
+  aspect-ratio: 4 / 5;
+
+  @media (max-width: 1023px) {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.devices__list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.device {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(70% 90% at 100% 0%, rgba(255, 90, 31, 0.1), transparent 60%), var(--c-surface);
+}
+
+.device__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+.device__maker {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-text-dim);
+}
+
+.device__name {
+  margin-top: 0.35rem;
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+}
+
+.device__badge {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  border: 1px solid rgba(255, 90, 31, 0.4);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.device__intro {
+  margin-top: 1.1rem;
+  color: var(--c-text-muted);
+}
+
+.device__checks {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem 1.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.92rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+
+  app-icon {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    color: var(--c-success);
+  }
+}
+
+.device__note {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--c-accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--c-accent-soft);
+  font-size: 0.92rem;
+  color: var(--c-text);
+}
+
+/* --------------------------------------------------------------------------
+   Standard rada
+   ------------------------------------------------------------------------ */
+.standard {
+  display: grid;
+  gap: 2rem;
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 90, 31, 0.4);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(80% 140% at 0% 0%, rgba(255, 90, 31, 0.14), transparent 60%), var(--c-surface);
+  color: var(--c-text-muted);
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+}
+
+.standard__big {
+  margin: 1rem 0 1.25rem;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 1.4rem + 2.2vw, 3.1rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--c-text);
+}
+
+.standard__steps {
+  list-style: none;
+  display: grid;
+  gap: 1px;
+  background: var(--c-line);
+  border-radius: var(--radius);
+  overflow: hidden;
+
+  li {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.9rem 1.1rem;
+    background: var(--c-bg);
+    color: var(--c-text);
+  }
+
+  span {
+    font-size: 0.8rem;
+    color: var(--c-accent);
+  }
+}

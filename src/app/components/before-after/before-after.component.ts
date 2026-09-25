@@ -18,7 +18,7 @@ import { RevealDirective } from '../../shared/directives/reveal.directive';
         <div class="ba__head">
           <app-section-heading
             eyebrow="Prije / poslije"
-            index="06"
+            index="07"
             title="Razlika koja se vidi – i mjeri"
             headingId="ba-title"
             lead="Naslage karbona na vrhu dizne mijenjaju oblik mlaza i uzrokuju lošije izgaranje. Povucite klizač i usporedite stanje prije i nakon reparacije."

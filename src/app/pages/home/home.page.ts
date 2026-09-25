@@ -8,6 +8,7 @@ import { UspComponent } from '../../components/usp/usp.component';
 import { ServicesComponent } from '../../components/services/services.component';
 import { ProcessComponent } from '../../components/process/process.component';
 import { EmissionComponent } from '../../components/emission/emission.component';
+import { LabComponent } from '../../components/lab/lab.component';
 import { SymptomsComponent } from '../../components/symptoms/symptoms.component';
 import { EquipmentComponent } from '../../components/equipment/equipment.component';
 import { BeforeAfterComponent } from '../../components/before-after/before-after.component';
@@ -25,6 +26,7 @@ import { ContactComponent } from '../../components/contact/contact.component';
     ServicesComponent,
     ProcessComponent,
     EmissionComponent,
+    LabComponent,
     SymptomsComponent,
     EquipmentComponent,
     BeforeAfterComponent,
@@ -40,6 +42,7 @@ import { ContactComponent } from '../../components/contact/contact.component';
     <app-services />
     <app-process />
     <app-emission />
+    <app-lab />
     <app-symptoms />
     <app-equipment />
     <app-before-after />
