@@ -96,7 +96,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     number: '04',
     title: 'Reparacija / kalibracija',
-    text: 'Čišćenje, zamjena istrošenih dijelova i podešavanje prema referentnim vrijednostima za pojedini tip.',
+    text: 'Injektor se rastavlja i slaže na profesionalnim stalcima (Ditex DX75165 i okretni stalak). Čišćenje, zamjena istrošenih dijelova i podešavanje prema referentnim vrijednostima za pojedini tip – a mlazne otvore starih dizni čistimo specijalnim borerima kakvi se koriste u stomatologiji za čišćenje korijenskih kanala.',
     icon: 'wrench',
   },
   {
@@ -245,6 +245,24 @@ export const EQUIPMENT: EquipmentItem[] = [
     image: 'nozzleMacro',
   },
   {
+    icon: 'wrench',
+    title: 'Stalak za slaganje injektora',
+    text: 'Ditex DX75165 – profesionalni stalak za sastavljanje injektora s komparatorom, za precizno mjerenje i podešavanje hoda ventila i igle.',
+    image: 'injectorAssemblyStand',
+  },
+  {
+    icon: 'sliders',
+    title: 'Okretni stalak',
+    text: 'Okretni stalak za sigurno rastavljanje i sastavljanje injektora – svaki dio vraća se na svoje mjesto uz kontrolu mjernim satom.',
+    image: 'injectorRotaryStand',
+  },
+  {
+    icon: 'injector',
+    title: 'Čišćenje mlaznih otvora',
+    text: 'Mlazne otvore starih dizni uspijevamo očistiti specijalnim borerima – istim finim instrumentima kojima stomatolozi čiste kanale korijena zuba.',
+    image: 'nozzleMacro',
+  },
+  {
     icon: 'cpu',
     title: 'Elektronička dijagnostika',
     text: 'Očitavanje grešaka, korekcija i parametara rada izravno iz vozila.',
@@ -367,9 +385,32 @@ export const GALLERY: GalleryItem[] = [
   },
   {
     image: 'injectorTestFixture',
-    caption: 'Ispitna naprava za dizne',
+    caption: 'Ditex DX75165 stalak za slaganje injektora',
     category: 'testiranje',
     tall: true,
+  },
+  {
+    image: 'injectorAssemblyStand',
+    caption: 'Ditex DX75165 – profesionalni stalak za slaganje injektora',
+    category: 'reparacija',
+    tall: true,
+  },
+  {
+    image: 'injectorRotaryStand',
+    caption: 'Okretni stalak za rastavljanje i sastavljanje injektora',
+    category: 'reparacija',
+    tall: true,
+  },
+  {
+    image: 'injectorRotaryStandGauge',
+    caption: 'Mjerenje komparatorom na okretnom stalku',
+    category: 'reparacija',
+  },
+  {
+    image: 'injectorExplodedDiagram',
+    caption: 'Rastavni crtež Bosch Common Rail injektora',
+    category: 'injektori',
+    wide: true,
   },
 ];
 

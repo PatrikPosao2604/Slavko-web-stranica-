@@ -160,9 +160,37 @@ export const IMAGES = {
   ),
   injectorTestFixture: img(
     'injector-test-fixture.webp',
-    'Ispitna naprava DX75165 za provjeru dizni na radnom stolu',
+    'Ditex DX75165 profesionalni stalak za slaganje injektora na radnom stolu',
     1600,
     2843,
+  ),
+  injectorAssemblyStand: img(
+    'injector-assembly-stand.webp',
+    'Ditex DX75165 profesionalni stalak za slaganje injektora s komparatorom za mjerenje hoda',
+    686,
+    960,
+    false,
+  ),
+  injectorRotaryStand: img(
+    'injector-rotary-stand.webp',
+    'Okretni stalak za rastavljanje i sastavljanje Common Rail injektora',
+    395,
+    826,
+    false,
+  ),
+  injectorRotaryStandGauge: img(
+    'injector-rotary-stand-gauge.webp',
+    'Injektor na okretnom stalku s digitalnim komparatorom i računalom za mjerenje',
+    394,
+    392,
+    false,
+  ),
+  injectorExplodedDiagram: img(
+    'injector-exploded-diagram.webp',
+    'Rastavni crtež Bosch Common Rail injektora – elektromagnet, ventilski sklop, kućište i dizna',
+    1153,
+    803,
+    false,
   ),
   injectorTestReports: img(
     'injector-test-reports.webp',
