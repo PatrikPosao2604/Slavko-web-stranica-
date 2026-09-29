@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SITE } from '../../core/config/site.config';
+import { SITE, type Stat } from '../../core/config/site.config';
 import { USPS } from '../../core/data/content.data';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { CountUpDirective } from '../../shared/directives/count-up.directive';
@@ -61,5 +61,5 @@ import { RevealDirective } from '../../shared/directives/reveal.directive';
 })
 export class UspComponent {
   protected readonly usps = USPS;
-  protected readonly stats = SITE.stats;
+  protected readonly stats: readonly Stat[] = SITE.stats;
 }

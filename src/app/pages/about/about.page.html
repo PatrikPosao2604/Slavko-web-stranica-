@@ -2,7 +2,7 @@
   title="Specijalisti za sustave ubrizgavanja"
   eyebrow="O nama"
   lead="Bavimo se isključivo diesel sustavima ubrizgavanja – dijagnostikom, testiranjem i reparacijom dizni, Common Rail injektora i visokotlačnih pumpi."
-  image="workshop"
+  image="workshopTestStations"
   [crumbs]="[{ label: 'Početna', path: '/' }, { label: 'O nama' }]"
 />
 
@@ -20,25 +20,25 @@
         uspješno poduzetništvo prilagođeno osobama s invaliditetom.
       </p>
       <p>
-        Moderni diesel motor radi onoliko dobro koliko precizno rade njegove dizne. Razlike od nekoliko
-        milimetara kubnih goriva po ubrizgavanju dovoljne su za dimljenje, gubitak snage ili probleme s
-        DPF-om. Zato smo se specijalizirali upravo za to područje.
+        Moderni diesel motor radi onoliko dobro koliko precizno rade njegove dizne. Razlike od
+        nekoliko milimetara kubnih goriva po ubrizgavanju dovoljne su za dimljenje, gubitak snage
+        ili probleme s DPF-om. Zato smo se specijalizirali upravo za to područje.
       </p>
       <p>
         U radionici {{ site.name }} svaki injektor prolazi isti postupak: ulazno testiranje,
-        pregled, reparaciju prema stanju i obaveznu završnu kontrolu. Tek kada su izmjerene vrijednosti
-        unutar dopuštenih odstupanja, injektor se vraća u vozilo.
+        pregled, reparaciju prema stanju i obaveznu završnu kontrolu. Tek kada su izmjerene
+        vrijednosti unutar dopuštenih odstupanja, injektor se vraća u vozilo.
       </p>
       <p>
-        Radimo s vlasnicima vozila, autoservisima i prijevoznicima. Injektore možete dovesti u vozilu
-        ili ih poslati dostavnom službom.
+        Radimo s vlasnicima vozila, autoservisima i prijevoznicima. Injektore možete dovesti u
+        vozilu ili ih poslati dostavnom službom.
       </p>
       <a class="btn btn--primary" routerLink="/" fragment="kontakt">
         Kontaktirajte nas <app-icon name="arrow-right" [size]="18" class="btn__arrow" />
       </a>
     </div>
     <div class="about__media" appReveal appRevealVariant="image">
-      <app-img key="technician" sizes="(min-width: 1024px) 45vw, 100vw" />
+      <app-img key="workshopWorkbench" sizes="(min-width: 1024px) 45vw, 100vw" />
     </div>
   </div>
 
@@ -47,7 +47,9 @@
     <ul class="principles">
       @for (p of principles; track p.title; let i = $index) {
         <li class="principle" appReveal [appRevealDelay]="i * 70">
-          <span class="principle__icon"><app-icon [name]="p.icon" [size]="26" [stroke]="1.5" /></span>
+          <span class="principle__icon"
+            ><app-icon [name]="p.icon" [size]="26" [stroke]="1.5"
+          /></span>
           <h3>{{ p.title }}</h3>
           <p>{{ p.text }}</p>
         </li>

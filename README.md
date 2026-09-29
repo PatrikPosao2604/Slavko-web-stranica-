@@ -99,11 +99,10 @@ Zamjena fotografije:
 3. Ako se promijenio omjer, ažurirajte `width`/`height` u `images.config.ts`
    (sprječava pomicanje layouta) i po potrebi `alt` tekst.
 
-Popis datoteka: `injector-hero`, `injector-repair`, `injector-testing`, `common-rail`,
-`injector-solenoid`, `injector-delphi`, `injector-denso`, `injector-piezo`,
-`high-pressure-pump`, `diagnostics`, `injector-coding`, `workshop`, `diesel-technician`,
-`nozzle-macro`, `microscope-inspection`, `ultrasonic-cleaning`, `flow-measurement`,
-`new-parts`, `car-diesel`, `before-repair`, `after-repair` (+ `og-image.jpg` 1200×630).
+Preostale ilustracije (placeholderi): `injector-hero`, `injector-repair`, `injector-testing`,
+`common-rail`, `injector-solenoid`, `injector-delphi`, `injector-denso`, `injector-piezo`,
+`high-pressure-pump`, `diagnostics`, `injector-coding`, `nozzle-macro`, `microscope-inspection`,
+`ultrasonic-cleaning`, `before-repair`, `after-repair` (+ `og-image.jpg` 1200×630).
 
 Za prije/poslije slider preporučuju se dvije fotografije snimljene iz **istog kuta**.
 

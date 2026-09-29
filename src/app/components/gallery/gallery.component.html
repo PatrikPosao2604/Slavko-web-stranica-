@@ -26,12 +26,22 @@
 
     <ul class="gallery__grid">
       @for (item of items(); track item.image + item.caption; let i = $index) {
-        <li class="tile" [class.tile--wide]="item.wide" [class.tile--tall]="item.tall" appReveal [appRevealDelay]="(i % 4) * 50">
-          <button type="button" class="tile__btn" (click)="open(i, $any($event.currentTarget))" [attr.aria-label]="'Otvori fotografiju: ' + item.caption">
+        <li
+          class="tile"
+          [class.tile--contain]="item.contain"
+          appReveal
+          [appRevealDelay]="(i % 4) * 50"
+        >
+          <button
+            type="button"
+            class="tile__btn"
+            (click)="open(i, $any($event.currentTarget))"
+            [attr.aria-label]="'Otvori fotografiju: ' + item.caption"
+          >
             <app-img
               [key]="item.image"
               class="tile__img"
-              [sizes]="item.wide ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 1024px) 25vw, 50vw'"
+              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
             />
             <span class="tile__overlay" aria-hidden="true">
               <span class="tile__caption">{{ item.caption }}</span>

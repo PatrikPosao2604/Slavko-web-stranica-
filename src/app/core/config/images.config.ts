@@ -87,11 +87,6 @@ export const IMAGES = {
   ),
 
   // --- Oprema i proces ------------------------------------------------------
-  workshop: img('workshop.webp', 'Uredna radionica za servis diesel sustava ubrizgavanja'),
-  technician: img(
-    'diesel-technician.webp',
-    'Serviser momentnim ključem priteže maticu injektora na radnom stolu',
-  ),
   nozzleMacro: img('nozzle-macro.webp', 'Makro snimka vrha dizne s mlaznim otvorima', 1600, 1600),
   microscope: img(
     'microscope-inspection.webp',
@@ -103,17 +98,6 @@ export const IMAGES = {
     'ultrasonic-cleaning.webp',
     'Ultrazvučna kada s dijelovima injektora tijekom čišćenja',
   ),
-  flowMeasurement: img(
-    'flow-measurement.webp',
-    'Mjerne posude za usporedbu količine ubrizgavanja i povrata goriva po injektoru',
-    1600,
-    2000,
-  ),
-  newParts: img(
-    'new-parts.webp',
-    'Novi zamjenski dijelovi za reparaciju injektora – ventili, dizne i brtve',
-  ),
-  car: img('car-diesel.webp', 'Osobno vozilo s diesel motorom spremno za dijagnostiku', 1600, 900),
 
   // --- Iz radionice (stvarne fotografije) ------------------------------------
   injectorBatchCaliper: img(
@@ -163,13 +147,6 @@ export const IMAGES = {
     'Ditex DX75165 profesionalni stalak za slaganje injektora na radnom stolu',
     1600,
     2843,
-  ),
-  injectorAssemblyStand: img(
-    'injector-assembly-stand.webp',
-    'Ditex DX75165 profesionalni stalak za slaganje injektora s komparatorom za mjerenje hoda',
-    686,
-    960,
-    false,
   ),
   injectorRotaryStand: img(
     'injector-rotary-stand.webp',

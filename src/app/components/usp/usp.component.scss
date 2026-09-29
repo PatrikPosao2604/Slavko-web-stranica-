@@ -39,10 +39,6 @@
   @media (min-width: 900px) {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  @media (min-width: 1240px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
 }
 
 .usp__card {

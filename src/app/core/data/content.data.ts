@@ -96,7 +96,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     number: '04',
     title: 'Reparacija / kalibracija',
-    text: 'Injektor se rastavlja i slaže na profesionalnim stalcima (Ditex DX75165 i okretni stalak). Čišćenje, zamjena istrošenih dijelova i podešavanje prema referentnim vrijednostima za pojedini tip – a mlazne otvore starih dizni čistimo specijalnim borerima kakvi se koriste u stomatologiji za čišćenje korijenskih kanala.',
+    text: 'Injektor se rastavlja na profesionalnim stalcima, čisti i dobiva nove dijelove gdje je potrebno. Mlazne otvore starih dizni čistimo specijalnim borerima, a zatim sve podešavamo prema referentnim vrijednostima.',
     icon: 'wrench',
   },
   {
@@ -205,14 +205,20 @@ export const EQUIPMENT: EquipmentItem[] = [
   {
     icon: 'gauge',
     title: 'Testni stolovi',
-    text: 'Simulacija rada injektora pri različitim tlakovima i duljinama impulsa.',
-    image: 'injectorTesting',
+    text: 'Hartridge Sabre i CRI Expert – simulacija rada injektora pri različitim tlakovima i usporedba ubrizgane količine i povrata po injektoru.',
+    image: 'workshopTestStations',
   },
   {
     icon: 'ruler',
     title: 'Mjerna oprema',
     text: 'Precizno mjerenje hoda, zazora i sila – vrijednosti koje odlučuju o ispravnom radu.',
-    image: 'newParts',
+    image: 'injectorPressGauge',
+  },
+  {
+    icon: 'wrench',
+    title: 'Stalci za rastavljanje i slaganje',
+    text: 'Ditex DX75165 profesionalni stalak i okretni stalak – injektor se sigurno rastavlja i slaže, a hod ventila i igle kontrolira se komparatorom.',
+    image: 'injectorTestFixture',
   },
   {
     icon: 'waves',
@@ -221,46 +227,28 @@ export const EQUIPMENT: EquipmentItem[] = [
     image: 'ultrasonic',
   },
   {
+    icon: 'injector',
+    title: 'Čišćenje mlaznih otvora',
+    text: 'Mlazne otvore starih dizni čistimo specijalnim borerima – istim finim instrumentima kojima stomatolozi čiste kanale korijena zuba.',
+    image: 'injectorNozzleTips',
+  },
+  {
     icon: 'microscope',
     title: 'Mikroskop',
     text: 'Pregled sjedišta ventila i vrha dizne na razini tragova trošenja.',
     image: 'microscope',
   },
   {
-    icon: 'sliders',
-    title: 'Kalibracija',
-    text: 'Podešavanje prema referentnim vrijednostima i generiranje korekcijskih kodova.',
-    image: 'injectorCoding',
-  },
-  {
-    icon: 'flask',
-    title: 'Mjerenje protoka',
-    text: 'Usporedba ubrizgane količine i povrata između injektora istog motora.',
-    image: 'flowMeasurement',
-  },
-  {
     icon: 'diamond',
     title: 'Poliranje na dijamantnim pločama',
-    text: 'Sjedišta i dosjedne površine dizne fino se poliraju na dijamantnim pločama do potpune ravnosti – uvjet za nepropusnost pod visokim tlakom.',
+    text: 'Sjedišta i dosjedne površine dizne fino se poliraju do potpune ravnosti – uvjet za nepropusnost pod visokim tlakom.',
     image: 'nozzleMacro',
-  },
-  {
-    icon: 'wrench',
-    title: 'Stalak za slaganje injektora',
-    text: 'Ditex DX75165 – profesionalni stalak za sastavljanje injektora s komparatorom, za precizno mjerenje i podešavanje hoda ventila i igle.',
-    image: 'injectorAssemblyStand',
   },
   {
     icon: 'sliders',
-    title: 'Okretni stalak',
-    text: 'Okretni stalak za sigurno rastavljanje i sastavljanje injektora – svaki dio vraća se na svoje mjesto uz kontrolu mjernim satom.',
-    image: 'injectorRotaryStand',
-  },
-  {
-    icon: 'injector',
-    title: 'Čišćenje mlaznih otvora',
-    text: 'Mlazne otvore starih dizni uspijevamo očistiti specijalnim borerima – istim finim instrumentima kojima stomatolozi čiste kanale korijena zuba.',
-    image: 'nozzleMacro',
+    title: 'Kalibracija i kodiranje',
+    text: 'Podešavanje prema referentnim vrijednostima i generiranje korekcijskih kodova na Bosch DCI stanici.',
+    image: 'injectorCodingStation',
   },
   {
     icon: 'cpu',
@@ -303,115 +291,64 @@ export interface GalleryItem {
   image: ImageKey;
   caption: string;
   category: GalleryCategory;
-  /** Veći format u gridu */
-  wide?: boolean;
-  tall?: boolean;
+  /** Prikaži cijelu sliku bez obrezivanja (npr. tehnički crteži) */
+  contain?: boolean;
 }
 
 export const GALLERY: GalleryItem[] = [
-  { image: 'hero', caption: 'Common Rail injektor', category: 'injektori', wide: true },
   {
-    image: 'flowMeasurement',
-    caption: 'Mjerenje protoka po injektoru',
-    category: 'testiranje',
-    tall: true,
+    image: 'workshopTestStations',
+    caption: 'Radionica s testnim stolovima',
+    category: 'radionica',
   },
-  { image: 'injectorRepair', caption: 'Rastavljeni injektor', category: 'reparacija' },
-  { image: 'nozzleMacro', caption: 'Vrh dizne pod povećanjem', category: 'injektori' },
-  { image: 'injectorTesting', caption: 'Testni stol', category: 'testiranje' },
-  { image: 'commonRail', caption: 'Common Rail sustav', category: 'injektori', wide: true },
-  { image: 'technician', caption: 'Montaža uz propisani moment', category: 'radionica' },
   {
-    image: 'microscope',
-    caption: 'Mikroskopski pregled sjedišta',
+    image: 'injectorTestFixture',
+    caption: 'Ditex DX75165 stalak za slaganje injektora',
     category: 'reparacija',
-    tall: true,
   },
-  { image: 'ultrasonic', caption: 'Ultrazvučno čišćenje', category: 'reparacija' },
-  { image: 'newParts', caption: 'Novi dijelovi za reparaciju', category: 'reparacija' },
-  { image: 'workshop', caption: 'Radionica', category: 'radionica', wide: true },
-  { image: 'highPressurePump', caption: 'Visokotlačna pumpa', category: 'injektori' },
-  { image: 'diagnostics', caption: 'Očitavanje korekcija', category: 'testiranje' },
-  { image: 'car', caption: 'Vozilo na dijagnostici', category: 'radionica', wide: true },
-  { image: 'before', caption: 'Dizna prije reparacije', category: 'reparacija', wide: true },
-  { image: 'after', caption: 'Dizna nakon reparacije', category: 'reparacija', wide: true },
+  {
+    image: 'injectorRotaryStand',
+    caption: 'Okretni stalak za rastavljanje i sastavljanje',
+    category: 'reparacija',
+  },
   {
     image: 'injectorBatchCaliper',
     caption: 'Injektori spremni za mjerenje',
     category: 'injektori',
-    wide: true,
-  },
-  {
-    image: 'injectorNozzleTips',
-    caption: 'Vrhovi injektora s oznakama',
-    category: 'injektori',
-    tall: true,
-  },
-  {
-    image: 'injectorTesterScreen',
-    caption: 'Ispitivanje na Mega Tester uređaju',
-    category: 'testiranje',
-    tall: true,
-  },
-  {
-    image: 'workshopWorkbench',
-    caption: 'Radni stol servisa',
-    category: 'radionica',
-    tall: true,
-  },
-  {
-    image: 'injectorTestReports',
-    caption: 'Injektori uz zapisnike ispitivanja',
-    category: 'testiranje',
-    tall: true,
-  },
-  {
-    image: 'workshopTestStations',
-    caption: 'Radne stanice za testiranje injektora',
-    category: 'radionica',
-    wide: true,
   },
   {
     image: 'injectorPressGauge',
     caption: 'Hidraulična preša s manometrom',
     category: 'testiranje',
-    tall: true,
   },
   {
-    image: 'injectorCodingStation',
-    caption: 'Bosch stanica za kodiranje injektora',
-    category: 'radionica',
-    wide: true,
-  },
-  {
-    image: 'injectorTestFixture',
-    caption: 'Ditex DX75165 stalak za slaganje injektora',
+    image: 'injectorTesterScreen',
+    caption: 'Ispitivanje na Mega Tester uređaju',
     category: 'testiranje',
-    tall: true,
   },
-  {
-    image: 'injectorAssemblyStand',
-    caption: 'Ditex DX75165 – profesionalni stalak za slaganje injektora',
-    category: 'reparacija',
-    tall: true,
-  },
-  {
-    image: 'injectorRotaryStand',
-    caption: 'Okretni stalak za rastavljanje i sastavljanje injektora',
-    category: 'reparacija',
-    tall: true,
-  },
+  { image: 'injectorNozzleTips', caption: 'Vrhovi injektora s oznakama', category: 'injektori' },
   {
     image: 'injectorRotaryStandGauge',
     caption: 'Mjerenje komparatorom na okretnom stalku',
     category: 'reparacija',
   },
   {
+    image: 'injectorCodingStation',
+    caption: 'Bosch stanica za kodiranje injektora',
+    category: 'radionica',
+  },
+  {
     image: 'injectorExplodedDiagram',
     caption: 'Rastavni crtež Bosch Common Rail injektora',
     category: 'injektori',
-    wide: true,
+    contain: true,
   },
+  {
+    image: 'injectorTestReports',
+    caption: 'Injektori uz zapisnike ispitivanja',
+    category: 'testiranje',
+  },
+  { image: 'workshopWorkbench', caption: 'Radni stol servisa', category: 'radionica' },
 ];
 
 /* --------------------------------------------------------------------------

@@ -29,7 +29,7 @@ import { IMAGES, ImageKey, srcsetFor } from '../../../core/config/images.config'
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: var(--img-fit, cover);
       object-position: var(--img-position, center);
     }
   `,

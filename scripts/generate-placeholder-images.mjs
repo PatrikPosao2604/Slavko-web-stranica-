@@ -564,65 +564,7 @@ scenes['injector-coding'] = {
   },
 };
 
-scenes['workshop'] = {
-  svg: (w, h) => {
-    const vp = [800, 430];
-    return `
-  <rect width="${w}" height="${h}" fill="#0b0c0e"/>
-  <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#15171a"/><stop offset="1" stop-color="#232629"/></linearGradient>
-  <path d="M0 ${h} L0 620 L${vp[0]} ${vp[1]} L${w} 620 L${w} ${h}Z" fill="url(#floor)"/>
-  ${Array.from({ length: 13 }, (_, i) => `<line x1="${vp[0]}" y1="${vp[1]}" x2="${-800 + i * 266}" y2="${h}" stroke="#fff" stroke-opacity=".05"/>`).join('')}
-  ${[640, 700, 790, 920].map((y) => `<line x1="0" y1="${y}" x2="${w}" y2="${y}" stroke="#fff" stroke-opacity=".04"/>`).join('')}
-  <!-- zidovi -->
-  <path d="M0 0 L${vp[0] - 300} 140 L${vp[0] - 300} ${vp[1] + 30} L0 620Z" fill="#121418"/>
-  <path d="M${w} 0 L${vp[0] + 300} 140 L${vp[0] + 300} ${vp[1] + 30} L${w} 620Z" fill="#101215"/>
-  <rect x="${vp[0] - 300}" y="140" width="600" height="${vp[1] - 110}" fill="#16191c"/>
-  <!-- svjetla -->
-  ${[0, 1, 2, 3]
-    .map((i) => {
-      const y = 30 + i * 30;
-      const half = 520 - i * 90;
-      return `<rect x="${vp[0] - half}" y="${y}" width="${half * 2}" height="${10 - i * 2}" rx="4" fill="#f5f7fa" opacity="${0.9 - i * 0.15}"/><rect x="${vp[0] - half}" y="${y}" width="${half * 2}" height="40" fill="#fff" opacity=".06" filter="url(#blur12)"/>`;
-    })
-    .join('')}
-  <!-- radni stolovi -->
-  <path d="M80 720 L520 600 L520 640 L80 780Z" fill="#2a2e33"/><path d="M80 780 L520 640 L520 760 L80 950Z" fill="#131518"/>
-  <path d="M${w - 80} 720 L${w - 520} 600 L${w - 520} 640 L${w - 80} 780Z" fill="#2a2e33"/><path d="M${w - 80} 780 L${w - 520} 640 L${w - 520} 760 L${w - 80} 950Z" fill="#131518"/>
-  <rect x="${vp[0] - 180}" y="420" width="360" height="130" rx="10" fill="#1b1e22" stroke="#2c3036"/>
-  <rect x="${vp[0] - 150}" y="440" width="120" height="70" rx="6" fill="#0b0c0e"/><circle cx="${vp[0] + 80}" cy="475" r="32" fill="#0b0c0e" stroke="#555"/>
-  <rect x="${vp[0] - 180}" y="420" width="360" height="12" fill="${ACCENT}" opacity=".85"/>
-  <!-- police -->
-  ${[200, 260, 320].map((y) => `<path d="M40 ${y} L420 ${y + 70} L420 ${y + 76} L40 ${y + 8}Z" fill="#2c3035"/>`).join('')}
-  ${[200, 260, 320].map((y) => `<path d="M${w - 40} ${y} L${w - 420} ${y + 70} L${w - 420} ${y + 76} L${w - 40} ${y + 8}Z" fill="#2c3035"/>`).join('')}
-  <!-- odraz -->
-  <ellipse cx="${vp[0]}" cy="900" rx="500" ry="80" fill="#fff" opacity=".04" filter="url(#blur30)"/>
-  ${bokeh(w, h, 5, 10)}
-  ${vignette(w, h, 0.7)}`;
-  },
-};
 
-scenes['diesel-technician'] = {
-  svg: (w, h) => `
-  ${studio(w, h, { spotX: 0.45, spotY: 0.3, accent: 0.35 })}
-  <rect x="0" y="760" width="${w}" height="${h - 760}" fill="#141618"/>
-  <rect x="0" y="760" width="${w}" height="6" fill="#2a2e33"/>
-  ${groundShadow(700, 800, 480, 30)}
-  <!-- škripac -->
-  <rect x="520" y="620" width="360" height="150" rx="10" fill="url(#darkMetal)"/>
-  <rect x="560" y="560" width="280" height="80" rx="8" fill="url(#steelH)"/>
-  ${placeInjector('solenoid', 700, 360, 520, 0)}
-  <!-- momentni ključ -->
-  <g transform="translate(700 470) rotate(-12)">
-    <rect x="0" y="-18" width="720" height="36" rx="18" fill="url(#steelH)"/>
-    <rect x="420" y="-26" width="300" height="52" rx="26" fill="url(#plasticBlack)"/>
-    <rect x="470" y="-26" width="16" height="52" fill="${ACCENT}"/>
-    <rect x="300" y="-14" width="100" height="28" rx="4" fill="#0b0c0e"/>
-    ${[0, 1, 2, 3, 4, 5, 6].map((i) => `<line x1="${310 + i * 13}" y1="-14" x2="${310 + i * 13}" y2="${i % 2 ? -2 : 4}" stroke="#cfd5db" stroke-width="2"/>`).join('')}
-    <circle cx="0" cy="0" r="54" fill="url(#steel)"/><circle cx="0" cy="0" r="30" fill="#15171a"/>
-  </g>
-  ${bokeh(w, h, 55, 12)}
-  ${vignette(w, h, 0.75)}`,
-};
 
 function nozzleFace(cx, cy, r, { dirty = false } = {}) {
   const holes = Array.from({ length: 8 }, (_, i) => {
@@ -717,76 +659,8 @@ scenes['ultrasonic-cleaning'] = {
   },
 };
 
-scenes['flow-measurement'] = {
-  w: 1600,
-  h: 2000,
-  svg: (w, h) => {
-    const xs = [270, 550, 830, 1110];
-    const lv = [0.58, 0.6, 0.57, 0.36];
-    return `
-  ${studio(w, h, { spotX: 0.5, spotY: 0.25, accent: 0.35 })}
-  ${bokeh(w, h, 13, 16)}
-  <rect x="140" y="260" width="1320" height="60" rx="10" fill="url(#steelH)"/>
-  ${xs.map((x) => `<rect x="${x + 70}" y="320" width="80" height="120" rx="8" fill="url(#steel)"/><path d="M${x + 110} 440 L${x + 85} 520 L${x + 135} 520Z" fill="url(#whiteGlow)" filter="url(#mist)"/>`).join('')}
-  ${xs.map((x, i) => cylinder(x, 520, 220, 1200, lv[i], i === 3)).join('')}
-  <rect x="140" y="1720" width="1320" height="60" rx="10" fill="url(#steelH)"/>
-  ${xs.map((x, i) => `<text x="${x + 110}" y="1880" font-family="DejaVu Sans Mono" font-size="44" fill="${i === 3 ? ACCENT : '#aab0b8'}" text-anchor="middle">INJ ${i + 1}</text>`).join('')}
-  ${vignette(w, h, 0.7)}`;
-  },
-};
 
-scenes['new-parts'] = {
-  svg: (w, h) => {
-    const cells = [];
-    for (let r = 0; r < 3; r++)
-      for (let c = 0; c < 5; c++) {
-        const x = 150 + c * 270,
-          y = 150 + r * 270;
-        let part = '';
-        const kind = (r * 5 + c) % 5;
-        if (kind === 0)
-          part = `<rect x="${x + 70}" y="${y + 60}" width="110" height="110" rx="12" fill="url(#steel)"/><rect x="${x + 102}" y="${y + 30}" width="46" height="40" rx="6" fill="url(#steel)"/>`;
-        if (kind === 1)
-          part = `<rect x="${x + 100}" y="${y + 30}" width="50" height="150" fill="url(#steel)"/><path d="M${x + 100} ${y + 180} Q${x + 125} ${y + 215} ${x + 150} ${y + 180}Z" fill="#9aa2ab"/>`;
-        if (kind === 2)
-          part = `<circle cx="${x + 125}" cy="${y + 115}" r="70" fill="none" stroke="#1b1d20" stroke-width="22"/><circle cx="${x + 125}" cy="${y + 115}" r="70" fill="none" stroke="#3a3f46" stroke-width="4"/>`;
-        if (kind === 3)
-          part = `<circle cx="${x + 125}" cy="${y + 115}" r="64" fill="url(#copper)"/><circle cx="${x + 125}" cy="${y + 115}" r="30" fill="#15171a"/>`;
-        if (kind === 4)
-          part = `<rect x="${x + 40}" y="${y + 100}" width="170" height="30" rx="15" fill="url(#steelH)"/><circle cx="${x + 60}" cy="${y + 115}" r="22" fill="url(#steel)"/>`;
-        cells.push(
-          `<rect x="${x}" y="${y}" width="250" height="250" rx="18" fill="#0e1012" stroke="#23272c" stroke-width="3"/>${part}`,
-        );
-      }
-    return `
-  <rect width="${w}" height="${h}" fill="#17191c"/>
-  <rect x="110" y="110" width="1380" height="850" rx="30" fill="#1f2226"/>
-  ${cells.join('')}
-  <ellipse cx="700" cy="300" rx="700" ry="300" fill="#fff" opacity=".05" filter="url(#blur30)"/>
-  ${vignette(w, h, 0.65)}`;
-  },
-};
 
-scenes['car-diesel'] = {
-  w: 1600,
-  h: 900,
-  svg: (w, h) => `
-  ${studio(w, h, { spotX: 0.5, spotY: 0.3, accent: 0.3 })}
-  <rect x="0" y="690" width="${w}" height="${h - 690}" fill="#101113"/>
-  ${groundShadow(800, 700, 700, 40, 1)}
-  <g transform="translate(40 150) scale(1.9)">
-    <linearGradient id="paint" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4a5058"/><stop offset=".35" stop-color="#1e2125"/><stop offset=".5" stop-color="#8a929b"/><stop offset=".56" stop-color="#23262a"/><stop offset="1" stop-color="#0c0d0f"/></linearGradient>
-    <path d="M40 228 L40 196 C40 180 55 170 80 166 L205 146 C240 112 275 92 320 86 L480 84 C530 86 575 112 610 146 L700 156 C735 160 752 176 752 200 L752 228 L690 228 A58 58 0 0 0 574 228 L230 228 A58 58 0 0 0 114 228 Z" fill="url(#paint)" stroke="#6b737c" stroke-width="1"/>
-    <path d="M228 146 C256 118 286 101 323 97 L396 96 L396 146 Z" fill="#0b0d10"/>
-    <path d="M410 96 L478 96 C514 98 546 118 572 146 L410 146 Z" fill="#0b0d10"/>
-    <path d="M236 142 C262 118 290 104 322 100 L360 100 L300 142Z" fill="#fff" opacity=".06"/>
-    <path d="M44 190 L70 178 L96 178 L92 192Z" fill="#f4f6f8" opacity=".9"/>
-    <path d="M740 180 L752 182 L752 200 L738 198Z" fill="${ACCENT}"/>
-    ${[172, 632].map((cx) => `<circle cx="${cx}" cy="232" r="46" fill="#0a0b0c"/><circle cx="${cx}" cy="232" r="30" fill="url(#steel)"/><circle cx="${cx}" cy="232" r="10" fill="#1a1c1f"/>`).join('')}
-  </g>
-  <rect x="0" y="700" width="${w}" height="200" fill="url(#vig)" opacity=".4"/>
-  ${vignette(w, h, 0.7)}`,
-};
 
 function beforeAfter(dirty) {
   return (w, h) => `
