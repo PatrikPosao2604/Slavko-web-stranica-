@@ -43,9 +43,9 @@ import { RevealDirective } from '../../shared/directives/reveal.directive';
                       <span class="accent">{{ s.prefix }}</span>
                     }
                     <span [appCountUp]="s.value">{{ s.value }}</span>
-                    @if (s.suffix) {
+                    <!-- @if (s.suffix) {
                       <span class="accent">{{ s.suffix }}</span>
-                    }
+                    } -->
                   </span>
                   <span class="usp__label" aria-hidden="true">{{ s.label }}</span>
                 </dd>
